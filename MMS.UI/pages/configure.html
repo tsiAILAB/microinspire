@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row form-horizontal">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="panel panel-info" style="min-height:120px;">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Configuration</h5>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Name</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control input-xs" ng-model="Model.Name" placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Value</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control input-xs" ng-model="Model.Value"
+                                placeholder="Value" />
+                        </div>
+                    </div>
+                    <div class="align-right" style="margin-right:10px;">
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="clear()">
+                            <i class="ace-icon fa fa-eraser"></i>
+                            <span class="bigger-110">Clear</span>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-primary">
+                            <i class="ace-icon fa fa-save"></i>
+                            <span class="bigger-110">Save</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

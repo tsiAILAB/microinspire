@@ -1,0 +1,93 @@
+<div class="main-container" style="background-color:  #85A74B;">
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="page-content login">
+        <div class="row form-horizontal">
+          <div class="col-lg-4 col-lg-offset-4">
+            <div class="panel panel-info" style="margin-top: 18%;">
+              <div class="panel-body">
+                <form id="login-form" class="relative-msg" autocomplete="off">
+                  <div class="form-group">
+                    <h1>
+                      <img src="img/MicroInspire.ico" alt="Logo" />
+                    </h1>
+                    <div>
+                      <p class="lead">
+                        <span>Please enter your email address and password to log in
+                          to this application. If you experience any issues
+                          logging in, please do not hesitate to
+                          <a href="mailto:ablmamuntue@yahoo.com">contact us.</a></span>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-xs-3">Email</label>
+                    <div class="col-xs-9">
+                      <span class="block input-icon input-icon-right">
+                        <input type="email" class="form-control input-xs" placeholder="Enter email" name="email"
+                          ng-model="Email" ng-enter="logIn()" required />
+                        <i class="ace-icon fa fa-envelope"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-xs-3">Password</label>
+                    <div class="col-xs-9">
+                      <span class="block input-icon input-icon-right">
+                        <input type="password" class="form-control input-xs" placeholder="Enter Password"
+                          name="password" ng-model="Password" ng-enter="logIn()" required
+                          data-smk-strongPass="strong" />
+                        <i class="ace-icon fa fa-lock"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="space"></div>
+                  <!-- <div class="form-group">
+                    <label class="pull-left" style="cursor:pointer;">
+                      <input type="checkbox" ng-model="RememberMe" mn-check />
+                      Remember Me
+                    </label>
+                    <label class="pull-right">
+                      <a href="javascript:">
+                        <span class="lbl"> Forgot your password?</span>
+                        <i class="ace-icon fa fa-arrow-right"></i>
+                      </a>
+                    </label>
+                    <div class="space"></div>
+                  </div> -->
+                  <div class="form-group">
+                    <div style="text-align: right;">
+                      <button type="button" class="width-20  btn btn-sm btn-primary" ng-click="logIn()">
+                        <i class="ace-icon fa fa-key"></i>
+                        <span class="bigger-110">Login</span>
+                      </button>
+                    </div>
+                    <div class="alert alert-danger" ng-show="errorMesage">
+                      <button type="button" class="close" ng-click="errorMesage = ''">
+                        <i class="glyphicon glyphicon-remove-sign white"></i>
+                      </button>
+                      {{ errorMesage }}
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer footer-fixed">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <span class="bigger-120" style="float: left;">
+          <span style="color:#85A74B" class="bolder">Micro</span><span style="color:#9C9E9F"
+            class="bolder">Inspire</span> &copy; 2019-2020
+        </span>
+        <span class="bigger-120 bolder" style="float: right;">
+          Version : 1.0.0.0
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

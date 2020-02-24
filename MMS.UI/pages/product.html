@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row form-horizontal">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="panel panel-info" style="min-height:120px;">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Product Information</h5>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Product Number</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control input-xs" ng-model="Model.ProductNumber"
+                                placeholder="Product Number" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Product Name</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control input-xs" ng-model="Model.ProductName"
+                                placeholder="Product Name" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Partner</label>
+                        <div class="col-xs-8">
+                            <select style="width: 100%;" ng-model="Model.PartnerId" data-url="/Combo/GetPartners"
+                                mn-select2 required>
+                                <option value=""></option>
+                                <option ng-repeat="pet in Partners" value="{{ pet.value }}">{{ pet.text }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget-box">
+                <div class="widget-header widget-header-flat">
+                    <h4 class="widget-title lighter">
+                        <i class="ace-icon fa fa-list orange"></i>
+                        Benefits
+                    </h4>
+                </div>
+                <div class="widget-body">
+                    <div class="widget-main no-padding">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Life</td>
+                                </tr>
+                                <tr>
+                                    <td>Life and Asset</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- /.widget-main -->
+                    <div class="widget-toolbox padding-8 clearfix">
+                        <div class="align-right" style="margin-right:10px;">
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="clear()">
+                                <i class="ace-icon fa fa-eraser"></i>
+                                <span class="bigger-110">Clear</span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="save()">
+                                <i class="ace-icon fa fa-save"></i>
+                                <span class="bigger-110">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </div><!-- /.widget-body -->
+            </div><!-- /.widget-box -->
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="row form-horizontal">
+    <div class="panel panel-info" style="min-height:250px;">
+      <div class="panel-heading">
+        <h5 class="panel-title">Claim Search</h5>
+      </div>
+      <div class="panel-body">
+        <div class="col-xs-12 col-sm-6 col-lg-6">
+          <div class="form-group">
+            <label class="control-label col-xs-4">Partner</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.PartnerId" data-url="/Combo/GetPartners"
+                ng-change="partnerChanged()" mn-select2>
+                <option value="-1">All</option>
+                <option ng-repeat="pet in Partners" value="{{ pet.value }}">{{ pet.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Product</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.ProductId" ng-change="productChanged()" mn-select2>
+                <option value="-1">All</option>
+                <option ng-repeat="pro in Products" value="{{ pro.value }}">{{ pro.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">External Id</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control input-xs" ng-model="Model.ExternalId" placeholder="External Id" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Insured First Name</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control input-xs" ng-model="Model.InsuredFirstName"
+                placeholder="Insured First Name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Insured Last Name</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control input-xs" ng-model="Model.InsuredLastName"
+                placeholder="Insured Last Name" />
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-6">
+          <div class="form-group">
+            <label class="control-label col-xs-4">Claim Number</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control input-xs" ng-model="Model.ClaimNumber"
+                placeholder="Claim Number" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Claim Status</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.ClaimStatus" data-url="/Combo/GetConfigurations/ClaimStatus"
+                mn-select2>
+                <option value="">All</option>
+                <option ng-repeat="st in Statuses" value="{{ st.text }}">{{ st.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Line of Business</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.BusinessId" mn-select2>
+                <option value="-1">All</option>
+                <option ng-repeat="bes in Business" value="{{ bes.value }}">{{ bes.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div style="display:none;">
+            <div class="form-group">
+              <label class="control-label col-xs-4">Notifier Location</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control input-xs" ng-model="Model.NotifierLocation"
+                  placeholder="Notifier Location" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-xs-4">Confirmation Required</label>
+              <div class="col-xs-8">
+                <select style="width: 100%;" ng-model="Model.ConfirmationRequired" mn-select2>
+                  <option value=""></option>
+                  <option value="1">YES</option>
+                  <option value="0">NO</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Policy Number</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control input-xs" ng-model="Model.PolicyNumber"
+                placeholder="Policy Number" />
+            </div>
+          </div>
+        </div>
+
+        <div class="align-right" style="margin-right:15px;">
+          <button type="button" class="btn btn-sm btn-primary" ng-click="search()"
+            ng-disabled="Model.PartnerId == '-1' && Model.ProductId == '-1' && Model.BusinessId == '-1' && !Model.PolicyNumber && !Model.ConfirmationRequired && !Model.NotifierLocation && !Model.ClaimStatus && !Model.ClaimNumber && !Model.InsuredFirstName && !Model.InsuredLastName && !Model.ExternalId">
+            <i class="ace-icon fa fa-search"></i>
+            <span class="bigger-110">Search</span>
+          </button>
+          <button type="button" class="btn btn-sm btn-primary" ng-click="clear()">
+            <i class="ace-icon fa fa-eraser"></i>
+            <span class="bigger-110">Clear</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h5 class="panel-title">Search Results</h5>
+      </div>
+      <div class="panel-body">
+        <table id="resultTable" class="table table-bordered table-hover"></table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,360 @@
+<div class="panel panel-info">
+  <div class="panel-body">
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Payment Amount</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            ng-model="model.Amount"
+            class="form-control input-xs"
+            mn-number
+            scale="2"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Payee Type</label>
+        <div class="col-xs-8">
+          <select
+            style="width: 100%;"
+            ng-model="model.PayeeType"
+            ng-change="typeChanged()"
+            mn-select2
+            required
+            ng-disabled="!model.Editing"
+          >
+            <option value=""></option>
+            <option ng-repeat="type in PayeeTypes" value="{{ type }}">
+              {{ type }}
+            </option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Payment Issued Date</label>
+        <div class="col-xs-8">
+          <div class="input-group input-group-xs date" mn-date>
+            <input
+              type="text"
+              ng-model="model.IssuedDate"
+              class="form-control"
+              ng-readonly="!model.Editing"
+            />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                <i class="glyphicon glyphicon-calendar blue"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Payee Name</label>
+        <div class="col-xs-8">
+          <select
+            style="width: 100%;"
+            ng-model="model.PayeeId"
+            mn-select2
+            required
+            ng-disabled="!model.Editing"
+            ng-if="model.PayeeType !== 'Other'"
+          >
+          <!-- ng-if="model.PayeeType === nam.ClientType" -->
+            <option
+              ng-repeat="nam in Names"
+              value="{{ nam.ClientId }}"
+            >
+              {{ nam.ClientName }}
+            </option>
+          </select>
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.PayeeName"
+            placeholder="Payee Name"
+            ng-readonly="!model.Editing"
+            ng-if="model.PayeeType === 'Other'"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Payment Issued By</label>
+        <div class="col-xs-8">
+          <select
+            style="width: 100%;"
+            ng-model="model.IssuedBy"
+            mn-select2
+            ng-disabled="!model.Editing"
+          >
+            <option value=""></option>
+            <option value="External Underwriter Via Claims Team"
+              >External Underwriter Via Claims Team</option
+            >
+            <option value="External Underwriter Directly"
+              >External Underwriter Directly</option
+            >
+            <option value="Claims Team Directly">Claims Team Directly</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Payment Received By Payee</label>
+        <div class="col-xs-8">
+          <div class="input-group input-group-xs date" mn-date>
+            <input
+              type="text"
+              ng-model="model.ReceivedPayeeDate"
+              class="form-control"
+              ng-readonly="!model.Editing"
+            />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                <i class="glyphicon glyphicon-calendar blue"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label class="control-label col-xs-2">Payee Comment</label>
+        <div class="col-xs-10">
+          <textarea
+            rows="2"
+            maxlength="250"
+            class="form-control"
+            ng-model="model.PayeeComment"
+            mn-showmax
+            ng-readonly="!model.Editing"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel panel-info" ng-if="model.PaymentMethod === 'Bank Transfer'">
+  <div class="panel-body">
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Account Name</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.AccountName"
+            placeholder="Account Name"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Account Number</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.AccountNumber"
+            placeholder="Account Number"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Sending Bank</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.SendingBank"
+            placeholder="Sending Bank"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Receiving Bank</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.ReceivingBank"
+            placeholder="Receiving Bank"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Transaction Reference</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.TransactionRef"
+            placeholder="Transaction Reference"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Bank Identification Number</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.BankIdentificationNumber"
+            placeholder="Bank Identification Number"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel panel-info" ng-if="model.PaymentMethod === 'Cheque'">
+  <div class="panel-body">
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Name On Cheque</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.NameOnCheque"
+            placeholder="Name On Cheque"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Cheque Number</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.ChequeNumber"
+            placeholder="Cheque Number"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Cheque Address</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.ChequeAddress"
+            placeholder="Cheque Address"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Date On Cheque</label>
+        <div class="col-xs-8">
+          <div class="input-group input-group-xs date" mn-date>
+            <input
+              type="text"
+              ng-model="model.DateOnCheque"
+              class="form-control"
+              ng-readonly="!model.Editing"
+            />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                <i class="glyphicon glyphicon-calendar blue"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel panel-info" ng-if="model.PaymentMethod === 'Mobile Wallet'">
+  <div class="panel-body">
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Wallet Name</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.WalletName"
+            placeholder="Wallet Name"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Wallet Number</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.WalletNumber"
+            placeholder="Wallet Number"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+        <label class="control-label col-xs-4">Transaction Reference</label>
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control input-xs"
+            ng-model="model.TransactionRef"
+            placeholder="Transaction Reference"
+            ng-readonly="!model.Editing"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bs-linebreak "></div>
+<div class="align-right" style="margin-right:15px;">
+  <button
+    type="button"
+    class="btn btn-sm btn-primary"
+    ng-if="!model.Editing"
+    ng-click="model.Editing = true"
+  >
+    <i class="ace-icon fa fa-edit"></i>
+    <span class="bigger-110">Edit</span>
+  </button>
+  <button
+    type="button"
+    class="btn btn-sm btn-primary"
+    ng-if="model.Editing"
+    ng-click="onCancel(model)"
+  >
+    <i class="ace-icon fa fa-close"></i>
+    <span class="bigger-110">Cancel</span>
+  </button>
+  <button
+    type="button"
+    class="btn btn-sm btn-primary"
+    ng-if="model.Editing"
+    ng-click="onupdate(model, eleId)"
+  >
+    <i class="ace-icon fa fa-save"></i>
+    <span class="bigger-110">Update</span>
+  </button>
+</div>

@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="panel panel-info" style="min-height:120px;">
+    <div class="panel-heading">
+      <h5 class="panel-title">Your Profile</h5>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Email Address</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-value="Model.User.Email" readonly
+              placeholder="Email Address" />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Organization</label>
+          <div class="col-xs-8">
+            <select disabled style="width: 100%;" ng-model="Model.User.Organization" data-url="/Combo/GetPartners"
+              mn-select2>
+              <option value="">All Organization</option>
+              <option ng-repeat="pet in Partners" value="{{ pet.value }}">{{ pet.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">First Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.User.FirstName" placeholder="First Name"
+              required />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Last Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.User.LastName" placeholder="Last Name" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h5 class="panel-title">Your Privileges</h5>
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-6">
+        <div class="widget-box transparent">
+          <div class="widget-header widget-header-flat">
+            <h4 class="widget-title lighter">
+              <i class="ace-icon fa fa-list orange"></i>
+              Assigned Roles
+            </h4>
+          </div>
+
+          <div class="widget-body">
+            <div class="widget-main no-padding">
+              <table class="table table-bordered table-striped">
+                <tbody>
+                  <tr ng-repeat="role in Model.Roles">
+                    <td>{{role.Role}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.widget-main -->
+          </div>
+          <!-- /.widget-body -->
+        </div>
+        <!-- /.widget-box -->
+      </div>
+
+      <div class="col-sm-6">
+        <div class="widget-box transparent">
+          <div class="widget-header widget-header-flat">
+            <h4 class="widget-title lighter">
+              <i class="ace-icon fa fa-list orange"></i>
+              Assigned Partners
+            </h4>
+          </div>
+
+          <div class="widget-body">
+            <div class="widget-main no-padding">
+              <table class="table table-bordered table-striped">
+                <tbody>
+                  <tr ng-repeat="pat in Model.Partners">
+                    <td>{{pat.PartnerName}}</td>
+                    <td>{{pat.Country}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.widget-main -->
+          </div>
+          <!-- /.widget-body -->
+        </div>
+        <!-- /.widget-box -->
+      </div>
+    </div>
+  </div>
+  <div class="align-right" style="margin-right:10px;">
+    <button type="button" class="btn btn-sm btn-primary" ng-click="update()">
+      <i class="ace-icon fa fa-save"></i>
+      <span class="bigger-110">Update</span>
+    </button>
+  </div>
+</div>

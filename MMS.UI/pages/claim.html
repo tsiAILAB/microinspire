@@ -1,0 +1,238 @@
+<div class="container">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h5 class="panel-title">Claim Information</h5>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">External Id</label>
+          <div class="col-xs-8">
+            <div class="input-group input-group-xs">
+              <input type="text" ng-model="Model.Claim.ExternalId" class="form-control" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="searchPolicy()">
+                  <i class="glyphicon glyphicon-search blue"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Partner</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Claim.PartnerId" data-url="/Combo/GetPartners"
+              ng-change="partnerChanged()" mn-select2 required>
+              <option value=""></option>
+              <option ng-repeat="pet in Partners" value="{{ pet.value }}">{{ pet.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Product</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Claim.ProductId" ng-change="productChanged()" mn-select2
+              required>
+              <option value=""></option>
+              <option ng-repeat="pro in Products" value="{{ pro.value }}">{{ pro.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Line Of Business</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Claim.BusinessId" ng-change="businessChanged(Business)"
+              mn-select2 required>
+              <option value=""></option>
+              <option ng-repeat="bes in Business" value="{{ bes.value }}">{{ bes.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Underwriter Name</label>
+          <div class="col-xs-8">
+            <select disabled style="width: 100%;" ng-model="Model.Claim.UnderWriterId" data-url="/Combo/GetUnderWriters"
+              mn-select2>
+              <option value=""></option>
+              <option ng-repeat="un in UnderWriters" value="{{ un.value }}">{{ un.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Insured First Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Insured.FirstName"
+              placeholder="Insured First Name" required />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Insured Last Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Insured.LastName"
+              placeholder="Insured Last Name" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Insured Mobile No</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Insured.MobileNo"
+              placeholder="Insured Mobile No" />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Insured Gender</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Insured.Gender" data-url="/Combo/GetConfigurations/Gender"
+              mn-select2>
+              <option value=""></option>
+              <option ng-repeat="gen in Genders" value="{{ gen.text }}">{{ gen.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Insured Age At Incident</label>
+          <div class="col-xs-8">
+            <input type="text" ng-model="Model.Insured.AgeAtCreationDate" class="form-control input-xs" mn-number />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Relationship to Policy Holder</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Insured.Relationship"
+              data-url="/Combo/GetConfigurations/Relationship" mn-select2 required>
+              <option value=""></option>
+              <option ng-repeat="rp in Relationships" value="{{ rp.text }}">{{ rp.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info" ng-if="showincident">
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Date of Incident</label>
+          <div class="col-xs-8">
+            <div class="input-group input-group-xs date" mn-date>
+              <input type="text" ng-model="Model.Claim.DateofIncident" class="form-control" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                  <i class="glyphicon glyphicon-calendar blue"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Date Notified</label>
+          <div class="col-xs-8">
+            <div class="input-group input-group-xs date" mn-date>
+              <input type="text" ng-model="Model.Claim.DateNotified" class="form-control" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                  <i class="glyphicon glyphicon-calendar blue"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-body">
+      <div ng-show="Model.Claim.PolicyId" class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Select Notifier</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Notifier.NType" ng-change="notifireChanged()" data-url="/Combo/GetConfigurations/ClientType"
+              mn-select2>
+              <option value=""></option>
+              <option ng-repeat="type in ClientTypes" value="{{ type.text }}">
+                {{ type.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Notifier First Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Notifier.FirstName"
+              placeholder="Notifier First Name" required />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Notifier Last Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Notifier.LastName"
+              placeholder="Notifier Last Name" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Notifier Age</label>
+          <div class="col-xs-8">
+            <input type="text" ng-model="Model.Notifier.AgeAtCreationDate" class="form-control input-xs" mn-number />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Notifier Location</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Notifier.Location"
+              placeholder="Notifier Location" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Notifier Contact Number</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Notifier.MobileNo"
+              placeholder="Notifier Contact Number" ng-required="!Model.Notifier.Email" />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Notifier Email Address</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Notifier.Email"
+              placeholder="Notifier Email Address" ng-required="!Model.Notifier.MobileNo" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="align-right" style="margin-right:15px;">
+    <button type="button" class="btn btn-sm btn-primary" ng-click="save()">
+      <i class="ace-icon fa fa-save"></i>
+      <span class="bigger-110">Save</span>
+    </button>
+    <button type="button" class="btn btn-sm btn-primary" ng-click="clear()">
+      <i class="ace-icon fa fa-eraser"></i>
+      <span class="bigger-110">Clear</span>
+    </button>
+  </div>
+</div>

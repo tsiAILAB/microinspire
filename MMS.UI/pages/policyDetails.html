@@ -1,0 +1,543 @@
+<div class="container">
+  <div class="row">
+    <div class="form-group">
+      <label class="control-label col-xs-4" style="font-weight: bold;">POLICY NUMBER :
+        {{ Model.Policy.PolicyNumber }}</label>
+    </div>
+  </div>
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+      <li data-id="policy" style="font-size: 12px; font-weight: bold;" class="active">
+        <a href="javascript:" data-target="#policy" data-toggle="tab" style="padding: 8px 8px !important;">Policy</a>
+      </li>
+      <li data-id="client" style="font-size: 12px; font-weight: bold;">
+        <a href="javascript:" data-target="#client" data-toggle="tab" style="padding: 8px 8px !important;">Client</a>
+      </li>
+      <li data-id="asset" style="font-size: 12px; font-weight: bold;">
+        <a href="javascript:" data-target="#asset" data-toggle="tab" style="padding: 8px 8px !important;">Asset</a>
+      </li>
+      <li data-id="claims" style="font-size: 12px; font-weight: bold;">
+        <a href="javascript:" data-target="#claims" data-toggle="tab" style="padding: 8px 8px !important;">Claims</a>
+      </li>
+      <li data-id="contributions" style="font-size: 12px; font-weight: bold;display: none;">
+        <a href="javascript:" data-target="#contributions" data-toggle="tab"
+          style="padding: 8px 8px !important;">Contributions</a>
+      </li>
+      <li data-id="payments" style="font-size: 12px; font-weight: bold;display: none;">
+        <a href="javascript:" data-target="#payments" data-toggle="tab"
+          style="padding: 8px 8px !important;">Payments</a>
+      </li>
+      <li data-id="communications" style="font-size: 12px; font-weight: bold;display: none;">
+        <a href="javascript:" data-target="#communications" data-toggle="tab"
+          style="padding: 8px 8px !important;">Communications</a>
+      </li>
+      <li data-id="notes" style="font-size: 12px; font-weight: bold;">
+        <a href="javascript:" data-target="#notes" data-toggle="tab" style="padding: 8px 8px !important;">Notes</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="active tab-pane form-horizontal" id="policy">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body">
+            <div class="col-xs-12 col-sm-6 col-lg-6">
+              <div class="form-group">
+                <label class="control-label col-xs-4">Start Date</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Policy.PolicyStart" readonly />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-4">Requested End Date</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Policy.RequestedEndDate" readonly />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-4">Product Name</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Policy.ProductName" readonly />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-4">First Name</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Clients[0].FirstName" readonly />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-4">Last Name</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Clients[0].LastName" readonly />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-4">Group Policy</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Policy.GroupPolicy" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-6">
+              <div class="form-group">
+                <label class="control-label col-xs-4">End Date</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Policy.PolicyEnd" readonly />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-4">End Reason</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Policy.EndReason" readonly />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-4">Benefit Subscribed</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Policy.BenefitName" readonly />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-4">External Id</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Policy.ExternalId" readonly />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-4">Sales Reference</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Policy.SalesReference" readonly />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-4">Payment Source</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-value="Model.Policy.PaymentSource" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="align-right" style="margin-right:15px;">
+              <button type="button" class="btn btn-sm btn-primary" ng-click="showEndDialog()"
+                ng-disabled="Model.Policy.PolicyStatus === 'Ended'">
+                <i class="ace-icon fa fa-close"></i>
+                <span class="bigger-110">End Policy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="client">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body">
+            <div style="margin-right:15px;">
+              <button type="button" class="btn btn-sm btn-primary" ng-click="addClient()"
+                ng-if="Model.Policy.PolicyStatus !== 'Ended'">
+                <i class="ace-icon fa fa-plus"></i>
+                <span class="bigger-110">Add Client</span>
+              </button>
+            </div>
+            <div class="bs-linebreak "></div>
+            <div id="accordion" class="accordion-style1 panel-group" ng-repeat="client in Model.Clients">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                      data-target="#client_{{ $index }}" href="javascript:">
+                      <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down"
+                        data-icon-show="ace-icon fa fa-angle-right"></i>
+                      {{ client.ClientType }} - {{ client.FirstName }}
+                      {{ client.LastName }}
+                    </a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="client_{{ $index }}">
+                  <div class="panel-body">
+                    <mn-client model="client" eleid="client_{{ $index }}" oncancel="cancelClient" onupdate="updateClient"></mn-client>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane form-horizontal" id="asset">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body">
+            <div id="accordionAsset" class="accordion-style1 panel-group">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionAsset"
+                      data-target="#assetloan" href="javascript:">
+                      <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down"
+                        data-icon-show="ace-icon fa fa-angle-right"></i>
+                      Loan - {{ Model.Policy.LoanAmount }}
+                    </a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="assetloan">
+                  <div class="panel-body">
+                    <div class="col-xs-12 col-sm-6 col-lg-6">
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Amount</label>
+                        <div class="col-xs-8">
+                          <input type="text" ng-value="Model.Policy.LoanAmount" class="form-control input-xs"
+                            readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Account No</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Policy.AccountNo" readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Category</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Policy.Category" readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Officer Id</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Policy.OfficerId" readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Centre Location</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Policy.CentreLocation"
+                            readonly />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-lg-6">
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Cover Start Date</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Policy.CoverStartDate"
+                            readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Term (Months)</label>
+                        <div class="col-xs-8">
+                          <input type="text" ng-value="Model.Policy.TermMonths" class="form-control input-xs"
+                            readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Cover End Date</label>
+                        <div class="col-xs-8">
+                          <input type="text" ng-value="Model.Policy.CoverEndDate" class="form-control input-xs"
+                            readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Officer Name</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Policy.OfficerName"
+                            readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Cycle</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Policy.Cycle" readonly />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default" ng-if="Model.Asset.AssetType">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionAsset"
+                      data-target="#assetother" href="javascript:">
+                      <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down"
+                        data-icon-show="ace-icon fa fa-angle-right"></i>
+                      {{ Model.Asset.AssetType }} -
+                      {{ Model.Asset.AssetValue }}
+                    </a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="assetother">
+                  <div class="panel-body">
+                    <div class="col-xs-12 col-sm-6 col-lg-6">
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Asset Type</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Asset.AssetType" readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Description</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Asset.AssetDescription"
+                            readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Address</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Asset.Address" readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Postal Code</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Asset.PostalCode" readonly />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-lg-6">
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Asset Value</label>
+                        <div class="col-xs-8">
+                          <input type="text" ng-value="Model.Asset.AssetValue" class="form-control input-xs" readonly />
+                        </div>
+                      </div>
+                      <div class="form-group" ng-if="Model.Asset.AssetType === 'Livestock'">
+                        <label class="control-label col-xs-4">Asset Count</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Asset.AssetCount" readonly />
+                        </div>
+                      </div>
+                      <div class="form-group" ng-if="Model.Asset.AssetType !== 'Livestock'">
+                        <label class="control-label col-xs-4">Business Description</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Asset.BusinessDescription"
+                            readonly />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-xs-4">Location</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Asset.Location" readonly />
+                        </div>
+                      </div>
+                      <div class="form-group" ng-if="Model.Asset.AssetType !== 'Livestock'">
+                        <label class="control-label col-xs-4">Structure Type</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-value="Model.Asset.StructureType"
+                            readonly />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="claims">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body">
+            <button type="button" class="btn btn-sm btn-primary" ng-click="showClaimDialog()"
+              ng-if="Model.Policy.PolicyStatus !== 'Ended'">
+              <i class="ace-icon fa fa-file"></i>
+              <span class="bigger-110">Create Claim</span>
+            </button>
+            <div class="bs-linebreak "></div>
+            <table id="claimTable" class="table table-bordered table-hover"></table>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="contributions">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body">
+            <div style="margin-right:15px;">
+              <button style="display:none;" type="button" class="btn btn-sm btn-primary"
+                ng-if="Model.Policy.PolicyStatus !== 'Ended'">
+                <i class="ace-icon fa fa-plus"></i>
+                <span class="bigger-110">Add Contribution</span>
+              </button>
+              <table id="contributionTable" class="table table-bordered table-hover"></table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="payments">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body"></div>
+        </div>
+      </div>
+      <div class="tab-pane" id="communications">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body"></div>
+        </div>
+      </div>
+      <div class="tab-pane" id="notes">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body">
+            <div style="margin-right:15px;">
+              <button type="button" class="btn btn-sm btn-primary" ng-click="showNoteDialog()"
+                ng-if="Model.Policy.PolicyStatus !== 'Ended'">
+                <i class="ace-icon fa fa-plus"></i>
+                <span class="bigger-110">Add Note</span>
+              </button>
+              <div class="bs-linebreak "></div>
+
+              <div class="timeline-container">
+                <div class="timeline-label">
+                  <span class="label label-success arrowed-in-right label-lg">
+                    <b>Notes</b>
+                  </span>
+                </div>
+
+                <div class="timeline-items" ng-repeat="note in Model.Notes">
+                  <div class="timeline-item clearfix">
+                    <div class="timeline-info">
+                      <i class="timeline-indicator ace-icon fa fa-book btn btn-pink no-hover green"></i>
+                    </div>
+
+                    <div class="widget-box transparent">
+                      <div class="widget-header widget-header-small">
+                        <h5 class="widget-title smaller">
+                          Note Added By {{ note.CreatedByName }} On
+                          {{ note.CreatedAtDate }}
+                        </h5>
+                      </div>
+
+                      <div class="widget-body">
+                        <div class="widget-main">
+                          {{ note.Note }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="note-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="true" data-keyboard="true"
+  data-draggable="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add Note</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row form-horizontal">
+          <div class="form-group">
+            <textarea rows="6" maxlength="1000" class="form-control" ng-model="Model.Note" placeholder="Note"
+              mn-showmax></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="addNote()">
+          <i class="ace-icon fa fa-plus"></i>
+          <span class="bigger-110">Add Note</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="claim-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="true" data-keyboard="true"
+  data-draggable="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Create Claim</h4>
+      </div>
+      <div class="modal-header">
+        <h4 class="modal-title">
+          Please select the Line Of Business for the claim and click continue to
+          complate the claim creation
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="row form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-xs-4">Line Of Business</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.BusinessId" mn-select2 ng-change="businessChanged(Business)">
+                <option value=""></option>
+                <option ng-repeat="bes in Business" value="{{ bes.value }}">{{ bes.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="createClaim()">
+          <span class="bigger-110">Continue</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="policyEnd-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="true" data-keyboard="true"
+  data-draggable="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Policy End</h4>
+      </div>
+      <div class="modal-header">
+        <h4 class="modal-title">
+          Please note that selecting Lapsed will end cover on the requested date
+          or the nearest paid period end date.
+        </h4>
+      </div>
+      <div class="modal-body" style="margin: 31px;">
+        <div class="row form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-xs-4">Requested End Date</label>
+            <div class="col-xs-8">
+              <div class="input-group input-group-xs date" mn-date>
+                <input type="text" ng-model="Model.RequestedEndDate" class="form-control" required />
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">
+                    <i class="glyphicon glyphicon-calendar blue"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">End Reason</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.EndReason" data-url="/Combo/GetConfigurations/EndReason"
+                mn-select2 required>
+                <option value=""></option>
+                <option ng-repeat="res in enResons" value="{{ res.text }}">{{ res.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Notes</label>
+            <div class="col-xs-8">
+              <textarea rows="6" maxlength="1000" class="form-control" ng-model="Model.Note" placeholder="Note"
+                mn-showmax></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="endPolicy()">
+          <span class="bigger-110">End Policy</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

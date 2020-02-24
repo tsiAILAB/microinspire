@@ -1,0 +1,1383 @@
+<div class="container">
+  <div class="panel panel-info">
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label" style="font-weight: bold;">CLAIM NUMBER : {{ Model.Claim.ClaimNumber }}</label>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-2">Status</label>
+          <div class="col-xs-10">
+            <select style="width: 100%;" ng-model="Model.Claim.ClaimStatus" ng-change="showStatusDialog()" mn-select2
+              required>
+              <option value="Registered" ng-if="Model.Claim.ClaimStatus === 'Registered'">Registered</option>
+              <option value="Documents Incomplete"
+                ng-if="Model.Claim.ClaimStatus === 'Registered' || Model.Claim.ClaimStatus === 'Documents Incomplete' || Model.Claim.ClaimStatus === 'Closed'">
+                Documents Incomplete</option>
+              <option value="Awaiting Claim Validation"
+                ng-if="Model.Claim.ClaimStatus === 'Documents Incomplete' || Model.Claim.ClaimStatus === 'Awaiting Claim Validation'">
+                Awaiting Claim Validation</option>
+              <option value="Awaiting UW Decision"
+                ng-if="Model.Claim.UWReviewRequired !== false && (Model.Claim.ClaimStatus === 'Awaiting Claim Validation' || Model.Claim.ClaimStatus === 'Awaiting UW Decision')">
+                Awaiting UW Decision</option>
+              <option value="Awaiting Payment"
+                ng-if="(Model.Claim.UWReviewRequired === false && Model.Claim.ClaimStatus === 'Awaiting Claim Validation') || Model.Claim.ClaimStatus === 'Awaiting UW Decision' || Model.Claim.ClaimStatus === 'Awaiting Payment'">
+                Awaiting Payment</option>
+              <option value="Closed">Closed</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Partner Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-value="Model.Claim.PartnerName" readonly />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Product Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-value="Model.Claim.ProductName" readonly />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Line Of Business</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-value="Model.Claim.BusinessName" readonly />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Underwriter Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-value="Model.Claim.UnderWriterName" readonly />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Policy First Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-value="Model.Claim.InsuredFirstName" readonly />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Policy Last Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-value="Model.Claim.InsuredLastName" readonly />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Policy Number</label>
+          <div class="col-xs-8">
+            <!-- <input type="text" class="form-control input-xs" ng-value="Model.Claim.PolicyNumber" readonly /> -->
+            <a href="javascript:" style="font-size: 14px; font-weight: bold;"
+              ng-click="policyDetails(Model.Claim.PolicyId)">{{ Model.Claim.PolicyNumber }}</a>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">External Id</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-value="Model.Claim.ExternalId" readonly />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Closure Reason</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-value="Model.Claim.ClosureReason" readonly />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Closure Date</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-value="Model.Claim.ClosureDate" readonly />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+      <li data-id="notiDetails" style="font-size: 12px; font-weight: bold;" class="active">
+        <a href="javascript:" data-target="#notiDetails" data-toggle="tab"
+          style="padding: 8px 8px !important;">Notification Details</a>
+      </li>
+      <li data-id="claimDetails" style="font-size: 12px; font-weight: bold;">
+        <a href="javascript:" data-target="#claimDetails" data-toggle="tab" style="padding: 8px 8px !important;">
+          Claim Details</a>
+      </li>
+      <li data-id="documents" style="font-size: 12px; font-weight: bold;">
+        <a href="javascript:" data-target="#documents" data-toggle="tab"
+          style="padding: 8px 8px !important;">Documents</a>
+      </li>
+      <li data-id="claimReview" style="font-size: 12px; font-weight: bold;">
+        <a href="javascript:" data-target="#claimReview" data-toggle="tab" style="padding: 8px 8px !important;">Claim
+          Review</a>
+      </li>
+      <li data-id="underwriterReview" style="font-size: 12px; font-weight: bold;"
+        ng-if="ModelBackup.Claim.UWReviewRequired !== false">
+        <a href="javascript:" data-target="#underwriterReview" data-toggle="tab"
+          style="padding: 8px 8px !important;">Underwriter Review</a>
+      </li>
+      <li data-id="payments" style="font-size: 12px; font-weight: bold;">
+        <a href="javascript:" data-target="#payments" data-toggle="tab" style="padding: 8px 8px !important;">Payment
+          Details</a>
+      </li>
+      <li data-id="reminders" style="font-size: 12px; font-weight: bold;">
+        <a href="javascript:" data-target="#reminders" data-toggle="tab" style="padding: 8px 8px !important;">Reminders
+        </a>
+      </li>
+      <li data-id="notes" style="font-size: 12px; font-weight: bold;">
+        <a href="javascript:" data-target="#notes" data-toggle="tab" style="padding: 8px 8px !important;">Notes</a>
+      </li>
+      <li data-id="history" style="font-size: 12px; font-weight: bold;"
+        ng-if="currentUserType === 'Admin' || currentUserType === 'SuperAdmin'">
+        <a href="javascript:" data-target="#history" data-toggle="tab" style="padding: 8px 8px !important;">History</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="active tab-pane" id="notiDetails">
+        <div class="panel panel-info" style="min-height: 200px;">
+          <div class="panel-body">
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Select Notifier</label>
+                <div class="col-xs-8">
+                  <select style="width: 100%;" ng-model="Model.Notifier.NType" ng-change="notifireChanged()"
+                    data-url="/Combo/GetConfigurations/ClientType" mn-select2 ng-disabled="!Model.Util.NotifireEditing">
+                    <option value=""></option>
+                    <option ng-repeat="type in ClientTypes" value="{{ type.text }}">
+                      {{ type.text }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">First Name</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-model="Model.Notifier.FirstName"
+                    placeholder="First Name" required ng-readonly="!Model.Util.NotifireEditing" />
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Last Name</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-model="Model.Notifier.LastName"
+                    placeholder="Last Name" ng-readonly="!Model.Util.NotifireEditing" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Contact Number</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-model="Model.Notifier.MobileNo"
+                    placeholder="Mobile No" ng-readonly="!Model.Util.NotifireEditing"
+                    ng-required="!Model.Notifier.Email" />
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Email Address</label>
+                <div class="col-xs-8">
+                  <input type="email" class="form-control input-xs" ng-model="Model.Notifier.Email"
+                    placeholder="Email Address" ng-readonly="!Model.Util.NotifireEditing"
+                    ng-required="!Model.Notifier.MobileNo" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Age</label>
+                <div class="col-xs-8">
+                  <input type="text" ng-model="Model.Notifier.AgeAtCreationDate" class="form-control input-xs"
+                    style="text-align: right;" ng-readonly="!Model.Util.NotifireEditing" mn-number />
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Location</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-model="Model.Notifier.Location"
+                    placeholder="Location" ng-readonly="!Model.Util.NotifireEditing" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Relationship To Insured</label>
+                <div class="col-xs-8">
+                  <select style="width: 100%;" ng-model="Model.Notifier.Relationship"
+                    data-url="/Combo/GetConfigurations/Relationship" mn-select2 required
+                    ng-disabled="!Model.Util.NotifireEditing">
+                    <option value=""></option>
+                    <option ng-repeat="rp in Relationships" value="{{ rp.text }}">{{ rp.text }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Date Notified</label>
+                <div class="col-xs-8">
+                  <div class="input-group input-group-xs date" mn-date data-end-date="0d">
+                    <input type="text" ng-model="Model.Claim.DateNotified" class="form-control"
+                      ng-readonly="!Model.Util.NotifireEditing" />
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">
+                        <i class="glyphicon glyphicon-calendar blue"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="align-right">
+              <button type="button" class="btn btn-sm btn-primary" ng-if="!Model.Util.NotifireEditing"
+                ng-click="Model.Util.NotifireEditing = true">
+                <i class="ace-icon fa fa-edit"></i>
+                <span class="bigger-110">Edit</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.NotifireEditing"
+                ng-click="cancelNotifire()">
+                <i class="ace-icon fa fa-close"></i>
+                <span class="bigger-110">Cancel</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.NotifireEditing"
+                ng-click="updateNotifier()">
+                <i class="ace-icon fa fa-save"></i>
+                <span class="bigger-110">Update</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="claimDetails">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body">
+            <div id="accordionClaimDet" class="accordion-style1 panel-group">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionClaimDet"
+                      data-target="#insuredCli" href="javascript:">
+                      <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down"
+                        data-icon-show="ace-icon fa fa-angle-right"></i>
+                      Insured Details
+                    </a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="insuredCli">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">First Name</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Insured.FirstName"
+                            placeholder="First Name" required ng-readonly="!Model.Util.InsuredEditing" />
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Last Name</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Insured.LastName"
+                            placeholder="Last Name" ng-readonly="!Model.Util.InsuredEditing" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Mobile No</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Insured.MobileNo"
+                            placeholder="Mobile No" ng-readonly="!Model.Util.InsuredEditing" />
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Bank Account Number</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Insured.AccountNo"
+                            placeholder="Bank Account Number" ng-readonly="!Model.Util.InsuredEditing" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Date of Birth</label>
+                        <div class="col-xs-8">
+                          <div class="input-group input-group-xs date" mn-date>
+                            <input type="text" ng-model="Model.Insured.DateofBirth" ng-change="birthDateChanged()"
+                              class="form-control" ng-readonly="!Model.Util.InsuredEditing" />
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">
+                                <i class="glyphicon glyphicon-calendar blue"></i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Age At Creation Date</label>
+                        <div class="col-xs-8">
+                          <input type="text" readonly ng-value="Model.Insured.AgeAtCreationDate"
+                            class="form-control input-xs" style="text-align: right;" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Gender</label>
+                        <div class="col-xs-8">
+                          <select style="width: 100%;" ng-model="Model.Insured.Gender"
+                            data-url="/Combo/GetConfigurations/Gender" mn-select2
+                            ng-disabled="!Model.Util.InsuredEditing">
+                            <option value=""></option>
+                            <option ng-repeat="gen in Genders" value="{{ gen.text }}">{{ gen.text }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Marital Status</label>
+                        <div class="col-xs-8">
+                          <select style="width: 100%;" ng-model="Model.Insured.MaritalStatus"
+                            data-url="/Combo/GetConfigurations/MaritalStatus" mn-select2
+                            ng-disabled="!Model.Util.InsuredEditing">
+                            <option value=""></option>
+                            <option ng-repeat="ms in MStatus" value="{{ ms.text }}">{{ ms.text }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Personal Id Type</label>
+                        <div class="col-xs-8">
+                          <select style="width: 100%;" ng-model="Model.Insured.PersonalIdType"
+                            data-url="/Combo/GetConfigurations/PersonalIdType" mn-select2
+                            ng-disabled="!Model.Util.InsuredEditing">
+                            <option></option>
+                            <option ng-repeat="pit in IdTypes" value="{{ pit.text }}">{{ pit.text }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Personal Id</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Insured.PersonalId"
+                            placeholder="Personal Id" ng-readonly="!Model.Util.InsuredEditing" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Address</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Insured.Address"
+                            placeholder="Address" ng-readonly="!Model.Util.InsuredEditing" />
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Email Address</label>
+                        <div class="col-xs-8">
+                          <input type="email" class="form-control input-xs" ng-model="Model.Insured.Email"
+                            placeholder="Email Address" ng-readonly="!Model.Util.InsuredEditing" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Location</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Insured.Location"
+                            placeholder="Location" ng-readonly="!Model.Util.InsuredEditing" />
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Postal Code</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Insured.PostalCode"
+                            placeholder="Postal Code" ng-readonly="!Model.Util.InsuredEditing" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="align-right">
+                      <button type="button" class="btn btn-sm btn-primary" ng-if="!Model.Util.InsuredEditing"
+                        ng-click="Model.Util.InsuredEditing = true">
+                        <i class="ace-icon fa fa-edit"></i>
+                        <span class="bigger-110">Edit</span>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.InsuredEditing"
+                        ng-click="cancelInsured()">
+                        <i class="ace-icon fa fa-close"></i>
+                        <span class="bigger-110">Cancel</span>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.InsuredEditing"
+                        ng-click="updateInsured()">
+                        <i class="ace-icon fa fa-save"></i>
+                        <span class="bigger-110">Update</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionClaimDet"
+                      data-target="#coverDet" href="javascript:">
+                      <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down"
+                        data-icon-show="ace-icon fa fa-angle-right"></i>
+                      Cover Details At Date Of Incident
+                    </a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="coverDet">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Line Of Business</label>
+                        <div class="col-xs-8">
+                          <select style="width: 100%;" ng-model="Model.Claim.BusinessId" mn-select2 required
+                            ng-disabled="!Model.Util.CoverEditing">
+                            <option value=""></option>
+                            <option ng-repeat="bes in Business" value="{{ bes.value }}">{{ bes.text }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Date Of Incident</label>
+                        <div class="col-xs-8">
+                          <div class="input-group input-group-xs date" mn-date data-end-date="0d">
+                            <input type="text" ng-model="Model.Claim.DateOfIncident" class="form-control"
+                              ng-readonly="!Model.Util.CoverEditing" ng-change="dateOfIncidentChanged()" />
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">
+                                <i class="glyphicon glyphicon-calendar blue"></i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Cover Start Date</label>
+                        <div class="col-xs-8">
+                          <div class="input-group input-group-xs date" mn-date>
+                            <input type="text" ng-model="Model.Claim.CoverStartDate" class="form-control" readonly />
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">
+                                <i class="glyphicon glyphicon-calendar blue"></i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Cover End Date</label>
+                        <div class="col-xs-8">
+                          <div class="input-group input-group-xs date" mn-date>
+                            <input type="text" ng-model="Model.Claim.CoverEndDate" class="form-control" readonly />
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">
+                                <i class="glyphicon glyphicon-calendar blue"></i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Cover Amount</label>
+                        <div class="col-xs-8">
+                          <input type="text" ng-model="Model.Claim.CoverAmount" class="form-control input-xs" mn-number
+                            scale="2" ng-readonly="!Model.Util.CoverEditing" />
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Revised Cover Amount</label>
+                        <div class="col-xs-8">
+                          <input type="text" ng-model="Model.Claim.RevisedCoverAmount" class="form-control input-xs"
+                            mn-number scale="2" ng-readonly="!Model.Util.CoverEditing" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="align-right">
+                      <button type="button" class="btn btn-sm btn-primary" ng-if="!Model.Util.CoverEditing"
+                        ng-click="Model.Util.CoverEditing = true">
+                        <i class="ace-icon fa fa-edit"></i>
+                        <span class="bigger-110">Edit</span>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.CoverEditing"
+                        ng-click="cancelCover()">
+                        <i class="ace-icon fa fa-close"></i>
+                        <span class="bigger-110">Cancel</span>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.CoverEditing"
+                        ng-click="updateCover()">
+                        <i class="ace-icon fa fa-save"></i>
+                        <span class="bigger-110">Update</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionClaimDet"
+                      data-target="#lineBuDet" href="javascript:">
+                      <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down"
+                        data-icon-show="ace-icon fa fa-angle-right"></i>
+                      Line Of Business Details: {{ Model.Claim.BusinessName }}
+                    </a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="lineBuDet">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label ng-if="Model.Claim.BusinessName !== 'Asset'" class="control-label col-xs-4">Date Of
+                          Death</label>
+                        <label ng-if="Model.Claim.BusinessName === 'Asset'" class="control-label col-xs-4">Date Of
+                          Incident</label>
+
+                        <div class="col-xs-8">
+                          <div class="input-group input-group-xs date" mn-date data-end-date="0d">
+                            <input type="text" ng-model="Model.Incident.DateOfDeath" class="form-control"
+                              ng-readonly="!Model.Util.IncidentEditing" ng-change="dateOfDeathChanged()" />
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">
+                                <i class="glyphicon glyphicon-calendar blue"></i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Location Of Incident</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Incident.LocationOfIncident"
+                            placeholder="Location Of Incident" ng-readonly="!Model.Util.IncidentEditing" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Incident Type</label>
+                        <div class="col-xs-8">
+                          <select style="width: 100%;" ng-model="Model.Incident.IncidentType"
+                            data-url="/Combo/GetConfigurations/IncidentType" mn-select2
+                            ng-disabled="!Model.Util.IncidentEditing">
+                            <option value=""></option>
+                            <option ng-repeat="inty in IncidentTypes" value="{{ inty.text }}">{{ inty.text }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Days From Incident</label>
+                        <div class="col-xs-8">
+                          <input type="text" readonly ng-value="Model.Incident.DaysFromIncident"
+                            class="form-control input-xs" style="text-align: right;" />
+                        </div>
+                      </div>
+                    </div>
+                    <div ng-if="Model.Claim.BusinessName !== 'Asset'" class="row">
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Hospital Name</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Incident.HospitalName"
+                            placeholder="Hospital Name" ng-readonly="!Model.Util.IncidentEditing" />
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Hospital Ward</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Incident.HospitalWard"
+                            placeholder="Hospital Ward" ng-readonly="!Model.Util.IncidentEditing" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div ng-if="Model.Claim.BusinessName !== 'Asset'" class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Hospital Location</label>
+                        <div class="col-xs-8">
+                          <input type="text" class="form-control input-xs" ng-model="Model.Incident.HospitalLocation"
+                            placeholder="Hospital Location" ng-readonly="!Model.Util.IncidentEditing" />
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                        <label class="control-label col-xs-4">Cause Of Incident</label>
+                        <div class="col-xs-8">
+                          <select style="width: 100%;" ng-model="Model.Incident.CauseOfIncidents" mn-select2
+                            ng-disabled="!Model.Util.IncidentEditing" multiple="multiple">
+                            <option value=""></option>
+                            <option ng-repeat="inty in IncidentCauses" value="{{ inty.text }}">{{ inty.text }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group">
+                        <label class="control-label col-xs-12">Details</label>
+                        <div class="col-xs-12">
+                          <textarea rows="4" maxlength="1000" class="form-control" ng-model="Model.Incident.Note"
+                            mn-showmax ng-readonly="!Model.Util.IncidentEditing"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bs-linebreak "></div>
+                    <div class="align-right">
+                      <button type="button" class="btn btn-sm btn-primary" ng-if="!Model.Util.IncidentEditing"
+                        ng-click="Model.Util.IncidentEditing = true">
+                        <i class="ace-icon fa fa-edit"></i>
+                        <span class="bigger-110">Edit</span>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.IncidentEditing"
+                        ng-click="cancelIncident()">
+                        <i class="ace-icon fa fa-close"></i>
+                        <span class="bigger-110">Cancel</span>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.IncidentEditing"
+                        ng-click="updateIncident()">
+                        <i class="ace-icon fa fa-save"></i>
+                        <span class="bigger-110">Update</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="documents">
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Complete Documents Date</label>
+                <div class="col-xs-8">
+                  <div class="input-group input-group-xs date" mn-date>
+                    <input type="text" ng-model="Model.Claim.DocumentCompleteDate" class="form-control"
+                      ng-readonly="!Model.Util.DocEditing" />
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">
+                        <i class="glyphicon glyphicon-calendar blue"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <button type="button" style="margin-top: -4px;" class="btn btn-sm btn-primary"
+                  ng-if="!Model.Util.DocEditing" ng-click="Model.Util.DocEditing = true">
+                  <i class="ace-icon fa fa-edit"></i>
+                  <span class="bigger-110">Edit</span>
+                </button>
+                <button type="button" style="margin-top: -4px;" class="btn btn-sm btn-primary"
+                  ng-if="Model.Util.DocEditing" ng-click="Model.Util.DocEditing = false">
+                  <i class="ace-icon fa fa-close"></i>
+                  <span class="bigger-110">Cancel</span>
+                </button>
+                <button type="button" style="margin-top: -4px;" class="btn btn-sm btn-primary"
+                  ng-if="Model.Util.DocEditing" ng-click="updateDocumentComplete()">
+                  <i class="ace-icon fa fa-save"></i>
+                  <span class="bigger-110">Update</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <p style="font-weight: bold;">
+              Please click the Browse button to locate the file you want to
+              upload to support this claim. Only PDF, JPEG and PNG file types
+              are allowed and should be less than 3MB. Once a file is chosen,
+              select the appropriate Document Type then click Add Document.
+              Repeat for each file to be uploaded.
+            </p>
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-5 col-lg-5">
+                <label style="font-weight: bold;" class="control-label col-xs-12">File Name:
+                  {{ Model.Document.FileName }}</label>
+                <div class="col-xs-12">
+                  <button type="button" id="documentUpload" class="btn btn-default btn-Main" style="width: 100%;">
+                    <i class="glyphicon glyphicon-cloud-upload"></i>
+                    Browse Document...
+                  </button>
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-5 col-lg-5">
+                <label class="control-label col-xs-12">Document Type</label>
+                <div class="col-xs-12">
+                  <select style="width: 100%;" ng-model="Model.Document.DocumentType"
+                    ng-disabled="!Model.Document.FileName" mn-select2>
+                    <option value=""></option>
+                    <option ng-repeat="dt in docTypes" value="{{ dt.text }}">{{ dt.text }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-2 col-lg-2">
+                <button style="margin-top:20px;" type="button" class="btn btn-sm btn-primary"
+                  ng-disabled="!Model.Document.DocumentType || !Model.Document.FileName" ng-click="addDocument()">
+                  <i class="ace-icon fa fa-plus"></i>
+                  <span class="bigger-110">Add Document</span>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Document Type</th>
+                    <th>File Name</th>
+                    <th>Added By</th>
+                    <th>Added On</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="doc in Model.Documents">
+                    <td>
+                      {{ doc.DocumentType }}
+                    </td>
+
+                    <td>
+                      <a href="{{ ApiUrl }}/{{ doc.FilePath }}{{
+                          doc.OrgFileName
+                        }}" target="_blank">{{ doc.FileName }}</a>
+                    </td>
+                    <td>
+                      {{ doc.CreatedByName }}
+                    </td>
+                    <td>
+                      {{ doc.CreatedAt }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="claimReview">
+        <div class="panel panel-info" style="min-height: 200px;">
+          <div class="panel-body">
+            <div class="row form-horizontal">
+              <div class="col-xs-12 col-sm-6 col-lg-6">
+                <div class="form-group">
+                  <label class="control-label col-xs-4">UW Review Required?</label>
+                  <div class="col-xs-2">
+                    <label>
+                      <input type="radio" ng-value="true" name="UWReviewRequired"
+                        ng-model="Model.Claim.UWReviewRequired" mn-check ng-disabled="!Model.Util.ReviewEditing" />
+                      Yes
+                    </label>
+                  </div>
+                  <div class="col-xs-2">
+                    <label>
+                      <input type="radio" ng-value="false" name="UWReviewRequired"
+                        ng-model="Model.Claim.UWReviewRequired" mn-check ng-disabled="!Model.Util.ReviewEditing" />
+                      No
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Approved Amount</label>
+                  <div class="col-xs-8">
+                    <input type="text" ng-model="Model.Claim.ApprovedAmount" class="form-control input-xs" mn-number
+                      scale="2" ng-readonly="!Model.Util.ReviewEditing" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Decision</label>
+                  <div class="col-xs-8">
+                    <select style="width: 100%;" ng-model="Model.Claim.Decision" mn-select2 required
+                      ng-disabled="!Model.Util.ReviewEditing" ng-change="decisionChange()">
+                      <option value=""></option>
+                      <option value="Approved">Approved</option>
+                      <option value="Rejected">Rejected</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group" ng-if="Model.Claim.Decision === 'Rejected'">
+                  <label class="control-label col-xs-4">Rejection Reason</label>
+                  <div class="col-xs-8">
+                    <select style="width: 100%;" ng-model="Model.Claim.RejectionReason"
+                      data-url="/Combo/GetConfigurations/RejectionReason" mn-select2 required
+                      ng-disabled="!Model.Util.ReviewEditing">
+                      <option value=""></option>
+                      <option ng-repeat="rr in rReason" value="{{ rr.text }}">{{ rr.text }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-lg-6">
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Review By</label>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control input-xs" ng-value="Model.Claim.ReviewByName" readonly />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Review Date</label>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control input-xs" ng-value="Model.Claim.ReviewDate" readonly />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Confirmed By</label>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control input-xs" ng-value="Model.Claim.ConfirmedByName" readonly />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Confirmed Date</label>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control input-xs" ng-value="Model.Claim.ConfirmedDate" readonly />
+                  </div>
+                </div>
+              </div>
+              <div class="align-right" style="margin-right:15px;">
+                <button type="button" class="btn btn-sm btn-primary" ng-if="!Model.Util.ReviewEditing"
+                  ng-click="Model.Util.ReviewEditing = true">
+                  <i class="ace-icon fa fa-edit"></i>
+                  <span class="bigger-110">Edit</span>
+                </button>
+                <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.ReviewEditing"
+                  ng-click="cancelClaimReview()">
+                  <i class="ace-icon fa fa-close"></i>
+                  <span class="bigger-110">Cancel</span>
+                </button>
+                <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.ReviewEditing"
+                  ng-click="updateClaimReview()">
+                  <i class="ace-icon fa fa-save"></i>
+                  <span class="bigger-110">Update</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="underwriterReview">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body" id="uwReview">
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Date Sent To UW</label>
+                <div class="col-xs-8">
+                  <div class="input-group input-group-xs date" mn-date>
+                    <input type="text" ng-model="Model.Claim.UWSentDate" class="form-control"
+                      ng-readonly="!Model.Util.UWEditing" />
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">
+                        <i class="glyphicon glyphicon-calendar blue"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">UW External Reference</label>
+                <div class="col-xs-8">
+                  <input type="text" class="form-control input-xs" ng-model="Model.Claim.UWExternalRef"
+                    placeholder="UW External Reference" ng-readonly="!Model.Util.UWEditing" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Status With UW</label>
+                <div class="col-xs-8">
+                  <select style="width: 100%;" ng-model="Model.Claim.UWStatus"
+                    data-url="/Combo/GetConfigurations/UnderwriterStatus" mn-select2 required
+                    ng-disabled="!Model.Util.UWEditing">
+                    <option value=""></option>
+                    <option ng-repeat="uws in UWStatuses" value="{{ uws.text }}">{{ uws.text }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="align-right">
+              <button type="button" class="btn btn-sm btn-primary" ng-if="!Model.Util.UWEditing"
+                ng-click="Model.Util.UWEditing = true">
+                <i class="ace-icon fa fa-edit"></i>
+                <span class="bigger-110">Edit</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.UWEditing" ng-click="cancelUW()">
+                <i class="ace-icon fa fa-close"></i>
+                <span class="bigger-110">Cancel</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.UWEditing" ng-click="updateUW()">
+                <i class="ace-icon fa fa-save"></i>
+                <span class="bigger-110">Update</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="panel-body" id="uwAdvice">
+            <div class="row form-horizontal">
+              <div class="col-xs-12 col-sm-6 col-lg-6">
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Advice Date</label>
+                  <div class="col-xs-8">
+                    <div class="input-group input-group-xs date" mn-date>
+                      <input type="text" ng-model="Model.Claim.UWAdviceDate" class="form-control"
+                        ng-readonly="!Model.Util.UWAEditing" />
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                          <i class="glyphicon glyphicon-calendar blue"></i>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Advice From</label>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control input-xs" ng-model="Model.Claim.UWAdviceFrom"
+                      ng-readonly="!Model.Util.UWAEditing" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Advice Reference</label>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control input-xs" ng-model="Model.Claim.UWAdviceRef"
+                      ng-readonly="!Model.Util.UWAEditing" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Approved Amount</label>
+                  <div class="col-xs-8">
+                    <input type="text" ng-model="Model.Claim.UWApprovedAmount" class="form-control input-xs" mn-number
+                      scale="2" ng-readonly="!Model.Util.UWAEditing" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Decision</label>
+                  <div class="col-xs-8">
+                    <select style="width: 100%;" ng-model="Model.Claim.UWDecision" mn-select2 required
+                      ng-disabled="!Model.Util.UWAEditing" ng-change="uwDecisionChange()">
+                      <option value=""></option>
+                      <option value="Approved">Approved</option>
+                      <option value="Rejected">Rejected</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group" ng-if="Model.Claim.UWDecision === 'Rejected'">
+                  <label class="control-label col-xs-4">Rejection Reason</label>
+                  <div class="col-xs-8">
+                    <select style="width: 100%;" ng-model="Model.Claim.UWRejectionReason"
+                      data-url="/Combo/GetConfigurations/RejectionReason" mn-select2 required
+                      ng-disabled="!Model.Util.UWAEditing">
+                      <option value=""></option>
+                      <option ng-repeat="rr in uwaReason" value="{{ rr.text }}">{{ rr.text }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-lg-6">
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Review By</label>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control input-xs" ng-value="Model.Claim.UWReviewByName" readonly />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Review Date</label>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control input-xs" ng-value="Model.Claim.UWReviewDate" readonly />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Confirmed By</label>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control input-xs" ng-value="Model.Claim.UWConfirmedByName"
+                      readonly />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-xs-4">Confirmed Date</label>
+                  <div class="col-xs-8">
+                    <input type="text" class="form-control input-xs" ng-value="Model.Claim.UWConfirmedDate" readonly />
+                  </div>
+                </div>
+              </div>
+              <div class="align-right" style="margin-right:15px;">
+                <button type="button" class="btn btn-sm btn-primary" ng-if="!Model.Util.UWAEditing"
+                  ng-click="Model.Util.UWAEditing = true">
+                  <i class="ace-icon fa fa-edit"></i>
+                  <span class="bigger-110">Edit</span>
+                </button>
+                <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.UWAEditing"
+                  ng-click="cancelUWA()">
+                  <i class="ace-icon fa fa-close"></i>
+                  <span class="bigger-110">Cancel</span>
+                </button>
+                <button type="button" class="btn btn-sm btn-primary" ng-if="Model.Util.UWAEditing"
+                  ng-click="updateUWA()">
+                  <i class="ace-icon fa fa-save"></i>
+                  <span class="bigger-110">Update</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="payments">
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-4 col-lg-4">
+                <label class="control-label col-xs-12">Cover Amount - {{ Model.Claim.CoverAmount }}</label>
+              </div>
+              <div class="form-group col-xs-12 col-sm-4 col-lg-4">
+                <label class="control-label col-xs-12">Approved Amount - {{ Model.Claim.ApprovedAmount }}</label>
+              </div>
+              <div class="form-group col-xs-12 col-sm-4 col-lg-4">
+                <label class="control-label col-xs-12" ng-show="Model.Claim.UWReviewRequired !== false">UW Approved
+                  Amount -
+                  {{ Model.Claim.UWApprovedAmount }}</label>
+                <label class="control-label col-xs-12" ng-show="Model.Claim.UWReviewRequired === false">UW Approved
+                  Amount - Not Required</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-4 col-lg-4">
+                <label class="control-label col-xs-12">Amount Paid To Date -
+                  {{ Model.Claim.AmountPaidToDate }}</label>
+              </div>
+              <div class="form-group col-xs-12 col-sm-4 col-lg-4">
+                <label class="control-label col-xs-12">Payment TAT - {{ Model.Claim.PaymentTATDetails }}</label>
+              </div>
+              <div class="form-group col-xs-12 col-sm-4 col-lg-4">
+                <label class="control-label col-xs-12">Payment Due Date - {{ Model.Claim.PaymentDueDate }}</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-6">Claim Team Awaiting UW Refund?</label>
+                <div class="col-xs-2">
+                  <label>
+                    <input type="radio" ng-value="true" name="UWRefundPending" ng-model="Model.Claim.UWRefundPending"
+                      mn-check />
+                    Yes
+                  </label>
+                </div>
+                <div class="col-xs-2">
+                  <label>
+                    <input type="radio" ng-value="false" name="UWRefundPending" ng-model="Model.Claim.UWRefundPending"
+                      mn-check />
+                    No
+                  </label>
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Claim Paid In Part?</label>
+                <div class="col-xs-2">
+                  <label>
+                    <input type="radio" ng-value="true" name="ClaimPaidInPart" ng-model="Model.Claim.ClaimPaidInPart"
+                      mn-check />
+                    Yes
+                  </label>
+                </div>
+                <div class="col-xs-2">
+                  <label>
+                    <input type="radio" ng-value="false" name="ClaimPaidInPart" ng-model="Model.Claim.ClaimPaidInPart"
+                      mn-check />
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <label class="control-label col-xs-4">Payment Method</label>
+                <div class="col-xs-8">
+                  <select style="width: 100%;" ng-model="Model.Claim.PaymentMethod" mn-select2>
+                    <option value=""></option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                    <option value="Cheque">Cheque</option>
+                    <option value="Mobile Wallet">Mobile Wallet</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+                <button type="button" style="margin-top: -4px;" class="btn btn-sm btn-primary"
+                  ng-disabled="!Model.Claim.PaymentMethod" ng-click="addPayment()">
+                  <i class="ace-icon fa fa-plus"></i>
+                  <span class="bigger-110">Add Payment</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info" ng-if="Model.Payments.length">
+          <div class="panel-body">
+            <div id="accordionpay" class="accordion-style1 panel-group" ng-repeat="payment in Model.Payments">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionpay"
+                      data-target="#payment_{{ $index }}" href="javascript:">
+                      <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down"
+                        data-icon-show="ace-icon fa fa-angle-right"></i>
+                      {{ payment.PaymentMethod }} Payment
+                      {{ payment.Amount }}
+                    </a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="payment_{{ $index }}">
+                  <div class="panel-body">
+                    <mn-payment model="payment" payeenames="Model.PayeeNames" eleid="payment_{{ $index }}"
+                      oncancel="cancelPayment" onupdate="updatePayment"></mn-payment>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="reminders">
+        <div class="panel panel-info" style="min-height: 200px;">
+          <div class="panel-body">
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-5 col-lg-5">
+                <label style="font-weight: bold;" class="control-label col-xs-12">Reminder Due Date</label>
+                <div class="col-xs-12">
+                  <div class="input-group input-group-xs date" mn-date>
+                    <input type="text" ng-model="Model.Claim.ReminderDueDate" class="form-control" />
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">
+                        <i class="glyphicon glyphicon-calendar blue"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-5 col-lg-5">
+                <label class="control-label col-xs-12">Reminder Comment</label>
+                <div class="col-xs-12">
+                  <input type="text" class="form-control input-xs" ng-model="Model.Claim.ReminderComment"
+                    placeholder="Comment" />
+                </div>
+              </div>
+              <div class="form-group col-xs-12 col-sm-2 col-lg-2">
+                <button style="margin-top:20px;" type="button" class="btn btn-sm btn-primary"
+                  ng-disabled="!Model.Claim.ReminderComment || !Model.Claim.ReminderDueDate" ng-click="setReminder()">
+                  <i class="ace-icon fa fa-bell"></i>
+                  <span class="bigger-110">Set Reminder</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="notes">
+        <div class="panel panel-info" style="min-height: 300px;">
+          <div class="panel-body">
+            <div style="margin-right:15px;">
+              <button type="button" class="btn btn-sm btn-primary" ng-click="showNoteDialog()"
+                ng-if="Model.Claim.ClaimStatus !== 'Closed'">
+                <i class="ace-icon fa fa-plus"></i>
+                <span class="bigger-110">Add Note</span>
+              </button>
+              <div class="bs-linebreak"></div>
+
+              <div class="timeline-container">
+                <div class="timeline-label">
+                  <span class="label label-success arrowed-in-right label-lg">
+                    <b>Notes</b>
+                  </span>
+                </div>
+
+                <div class="timeline-items" ng-repeat="note in Model.Notes">
+                  <div class="timeline-item clearfix">
+                    <div class="timeline-info">
+                      <i class="timeline-indicator ace-icon fa fa-book btn btn-pink no-hover green"></i>
+                    </div>
+
+                    <div class="widget-box transparent">
+                      <div class="widget-header widget-header-small">
+                        <h5 class="widget-title smaller">
+                          Note Added By {{ note.CreatedByName }} On
+                          {{ note.CreatedAt }}
+                        </h5>
+                      </div>
+
+                      <div class="widget-body">
+                        <div class="widget-main">
+                          {{ note.Note }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="history">
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs">
+            <li data-id="claimHistory" style="font-size: 12px; font-weight: bold;" class="active">
+              <a href="javascript:" data-target="#claimHistory" data-toggle="tab"
+                style="padding: 8px 8px !important;">Claim History</a>
+            </li>
+            <li data-id="statusHistory" style="font-size: 12px; font-weight: bold;">
+              <a href="javascript:" data-target="#statusHistory" data-toggle="tab"
+                style="padding: 8px 8px !important;">Status History</a>
+            </li>
+          </ul>
+          <div class="tab-content" style="height: 400px;">
+            <div class="active tab-pane" id="claimHistory">
+              <table id="claimHistoryTable" class="table table-bordered table-hover">
+              </table>
+            </div>
+            <div class="tab-pane" id="statusHistory">
+              <table id="statusHistoryTable" class="table table-bordered table-hover"></table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="status-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="true" data-keyboard="true"
+  data-draggable="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title">
+          You have selected to update the claim status from
+          <strong class="ng-binding">{{
+            ModelBackup.Claim.ClaimStatus
+          }}</strong>
+          to
+          <strong class="ng-binding">{{ Model.Claim.ClaimStatus }}</strong>
+        </h5>
+      </div>
+      <div class="modal-header" ng-if="Model.Claim.ClaimStatus === 'Closed'">
+        <h5 class="modal-title">
+          In order to close this claim please select the required closure
+          reason.
+        </h5>
+        <div class="col-xs-12">
+          <select style="width: 100%;" ng-model="Model.Claim.ClosureReason"
+            data-url="/Combo/GetConfigurations/ClosureReason" mn-select2>
+            <option value=""></option>
+            <option ng-repeat="res in closureReasons" value="{{ res.text }}">{{ res.text }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Please click Update Status to confirm.
+        </h5>
+      </div>
+      <div class="modal-body" style="margin: 31px;">
+        <div class="row">
+          <div class="col-xs-12">
+            <textarea rows="6" maxlength="1000" class="form-control" ng-model="Model.Note"
+              placeholder="{{statusNodePlaceholder}}" mn-showmax></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="updateStatus()"
+          ng-disabled="!Model.Claim.ClosureReason && Model.Claim.ClaimStatus === 'Closed'">
+          <span class="bigger-110">Update Status</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="note-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="true" data-keyboard="true"
+  data-draggable="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add Note</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row form-horizontal">
+          <div class="form-group">
+            <textarea rows="6" maxlength="1000" class="form-control" ng-model="Model.Note" placeholder="Note"
+              mn-showmax></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" ng-click="addNote()">
+          <i class="ace-icon fa fa-plus"></i>
+          <span class="bigger-110">Add Note</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="error-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="true" data-keyboard="true"
+  data-draggable="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title">
+          Unable to update the claim status from
+          <strong class="ng-binding">{{
+            ModelBackup.Claim.ClaimStatus
+          }}</strong>
+          to
+          <strong class="ng-binding">{{ Model.Claim.ClaimStatus }}</strong>
+          due to incomplete mandatory fields.
+        </h5>
+      </div>
+      <div class="modal-body" style="margin: 1px;">
+        <div class="row">
+          <div class="alert alert-danger">
+            <p ng-repeat="msg in mandatoryMesage">{{ msg }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">
+          <span class="bigger-110">OK</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

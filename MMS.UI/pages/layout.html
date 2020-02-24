@@ -1,0 +1,296 @@
+<div id="navbar" class="navbar navbar-default navbar-collapse h-navbar ace-save-state navbar-fixed-top">
+  <div class="navbar-container ace-save-state" id="navbar-container">
+    <div class="navbar-header pull-right">
+      <a href="javascript:" class="navbar-brand">
+        <small>
+          <img height="43" width="150" src="img/MicroInspire.ico" alt="Logo" />
+        </small>
+      </a>
+      <button class="pull-right navbar-toggle collapsed" type="button" data-toggle="collapse"
+        data-target=".navbar-buttons,.navbar-menu">
+        <span class="sr-only">Toggle sidebar</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-buttons navbar-header pull-right  collapse navbar-collapse" role="navigation">
+      <ul class="nav ace-nav">
+        <li class="light-blue hover">
+          <a data-toggle="dropdown" href="javascript:" class="dropdown-toggle">
+            <i class="ace-icon fa fa-user bigger-230 blue" style="margin-top: 6px; margin-right: 6px;">
+            </i>
+            <!-- <img class="nav-user-photo"
+                             src="img/avatars/user.jpg"
+                             alt="User Photo" /> -->
+            <span style="font-weight: bold;" class="user-info">
+              <small>Welcome,</small>
+              {{ currentUserName }}
+            </span>
+            <i class="ace-icon fa fa-caret-down blue"></i>
+          </a>
+          <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+            <li>
+              <a ui-sref="layout.profile">
+                <i class="ace-icon fa fa-user"></i>
+                Profile
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a ui-sref="layout.changepassword">
+                <i class="ace-icon fa fa-key"></i>
+                Change Password
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a ui-sref="login">
+                <i class="ace-icon fa fa-power-off"></i>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="hover" ng-class="{'active': !currentPage || currentPage === 'home'}">
+          <a ui-sref="layout.home">
+            <i class="menu-icon fa fa-home"></i>
+            <span class="menu-text"> Home </span>
+          </a>
+          <b class="arrow"></b>
+        </li>
+        <li ng-if="currentUserType === 'SuperAdmin'" lass="hover"
+          ng-class="{'active': currentPage === 'partner' || currentPage === 'product' || currentPage === 'configure'}">
+          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="menu-icon fa fa-cogs"></i>
+            Admin &nbsp;
+            <i class="ace-icon fa fa-angle-down bigger-110"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-light-blue dropdown-caret">
+            <li class="hover" ng-class="{'active': currentPage === 'partner'}">
+              <a ui-sref="layout.partner">
+                <i class="ace-icon fa fa-users blue"></i>
+                Partner
+              </a>
+            </li>
+            <li class="hover" ng-class="{'active': currentPage === 'product'}">
+              <a ui-sref="layout.product">
+                <i class="ace-icon glyphicon glyphicon-list blue"></i>
+                Product
+              </a>
+            </li>
+            <li class="hover" ng-class="{'active': currentPage === 'configure'}">
+              <a ui-sref="layout.configure">
+                <i class="ace-icon glyphicon glyphicon-cog blue"></i>
+                Configuration
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li ng-if="currentUserType !== 'Nirvoy'" class="hover"
+          ng-class="{'active': currentPage === 'policy' || currentPage === 'policysearch'}">
+          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="menu-icon fa fa-ruble"></i>
+            Policy &nbsp;
+            <i class="ace-icon fa fa-angle-down bigger-110"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-light-blue dropdown-caret">
+            <li class="hover" ng-class="{'active': currentPage === 'policy'}">
+              <a ui-sref="layout.policy">
+                <i class="ace-icon fa fa-file blue"></i>
+                Create
+              </a>
+            </li>
+            <li class="hover" ng-class="{'active': currentPage === 'policysearch'}">
+              <a ui-sref="layout.policysearch">
+                <i class="ace-icon fa fa-search blue"></i>
+                Search
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li ng-if="currentUserType !== 'Nirvoy'" class="hover"
+          ng-class="{'active': currentPage === 'claim' || currentPage === 'claimsearch' || currentPage === 'dashboard'}">
+          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="menu-icon fa fa-users"></i>
+            Claim &nbsp;
+            <i class="ace-icon fa fa-angle-down bigger-110"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-light-blue dropdown-caret">
+            <li class="hover" ng-class="{'active': currentPage === 'claim'}">
+              <a ui-sref="layout.claim">
+                <i class="ace-icon fa fa-file blue"></i>
+                Create
+              </a>
+            </li>
+            <li class="hover" ng-class="{'active': currentPage === 'claimsearch'}">
+              <a ui-sref="layout.claimsearch">
+                <i class="ace-icon fa fa-search blue"></i>
+                Search
+              </a>
+            </li>
+            <!-- <li class="hover" ng-class="{'active': currentPage === 'dashboard'}">
+              <a ui-sref="layout.dashboard">
+                <i class="ace-icon fa fa-tachometer blue"></i>
+                Dashboard
+              </a>
+            </li> -->
+          </ul>
+        </li>
+        <li ng-if="currentUserType !== 'Nirvoy'" class="hover" ng-class="{'active': currentPage === 'report'}">
+          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="menu-icon fa fa-bar-chart-o"></i>
+            Reports &nbsp;
+            <i class="ace-icon fa fa-angle-down bigger-110"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-light-blue dropdown-caret">
+            <li class="hover" ng-class="{'active': currentPage === 'report' && ReportName === 'Client'}">
+              <a ui-sref="layout.report({ reportName: 'Client' })">
+                <i class="ace-icon glyphicon glyphicon-list blue"></i>
+                Client
+              </a>
+            </li>
+            <li style="display:none;" class="hover"
+              ng-class="{'active': currentPage === 'report' && ReportName === 'Cover'}">
+              <a ui-sref="layout.report({ reportName: 'Cover' })">
+                <i class="ace-icon glyphicon glyphicon-list blue"></i>
+                Cover
+              </a>
+            </li>
+            <li style="display:none;" class="hover"
+              ng-class="{'active': currentPage === 'report' && ReportName === 'Payment'}">
+              <a ui-sref="layout.report({ reportName: 'Payment' })">
+                <i class="ace-icon glyphicon glyphicon-list blue"></i>
+                Payment
+              </a>
+            </li>
+            <li class="hover" ng-class="{'active': currentPage === 'report' && ReportName === 'Policy'}">
+              <a ui-sref="layout.report({ reportName: 'Policy' })">
+                <i class="ace-icon glyphicon glyphicon-list blue"></i>
+                Policy
+              </a>
+            </li>
+            <li class="dropdown-hover hidden-xs">
+              <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="ace-icon glyphicon glyphicon-list blue"></i>
+                Claim
+                <i class="menu-icon fa fa-caret-right"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-light-blue">
+                <li class="hover" ng-class="{'active': currentPage === 'report' && ReportName === 'ClaimDetails'}">
+                  <a ui-sref="layout.report({ reportName: 'ClaimDetails' })">
+                    <i class="ace-icon glyphicon glyphicon-list blue"></i>
+                    Claim Details
+                  </a>
+                </li>
+                <li class="hover" ng-class="{'active': currentPage === 'report' && ReportName === 'ClaimPayments'}">
+                  <a ui-sref="layout.report({ reportName: 'ClaimPayments' })">
+                    <i class="ace-icon glyphicon glyphicon-list blue"></i>
+                    Claim Payments
+                  </a>
+                </li>
+                <li class="hover" ng-class="{'active': currentPage === 'report' && ReportName === 'CWTReporting'}">
+                  <a ui-sref="layout.report({ reportName: 'CWTReporting' })">
+                    <i class="ace-icon glyphicon glyphicon-list blue"></i>
+                    CWT Reporting
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="hover" ng-class="{'active': currentPage === 'report' && ReportName === 'Partner'}">
+              <a ui-sref="layout.report({ reportName: 'Partner' })">
+                <i class="ace-icon glyphicon glyphicon-list blue"></i>
+                Partner Extracts
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li ng-if="currentUserType !== 'Nirvoy'" class="hover" ng-class="{'active': currentPage === 'importdata'}">
+          <a ui-sref="layout.importdata">
+            <i class="ace-icon fa fa-cloud-upload"></i>
+            <span class="menu-text"> Import Data </span>
+          </a>
+        </li>
+        <li ng-if="currentUserType === 'SuperAdmin' || currentUserType === 'Admin' || currentUserType === 'Nirvoy'"
+          class="hover" ng-class="{'active': currentPage === 'nirvoyenroll' || currentPage === 'nirvoyclaim'}">
+          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="menu-icon fa fa-users"></i>
+            Nirvoy &nbsp;
+            <i class="ace-icon fa fa-angle-down bigger-110"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-light-blue dropdown-caret">
+            <li class="hover" ng-class="{'active': currentPage === 'nirvoyenroll'}">
+              <a ui-sref="layout.nirvoyenroll">
+                <i class="ace-icon fa fa-user blue"></i>
+                Enroll in Nirvoy Life
+              </a>
+            </li>
+            <li class="hover" ng-class="{'active': currentPage === 'nirvoyclaim'}">
+              <a ui-sref="layout.nirvoyclaim">
+                <i class="ace-icon fa fa-file blue"></i>
+                Create Claim
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li ng-if="currentUserType === 'Admin' || currentUserType === 'SuperAdmin'" class="hover"
+          ng-class="{'active': currentPage === 'user' || currentPage === 'privilege'}">
+          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="menu-icon fa fa-lock"></i>
+            Security &nbsp;
+            <i class="ace-icon fa fa-angle-down bigger-110"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-light-blue dropdown-caret">
+            <li class="hover" ng-class="{'active': currentPage === 'user'}">
+              <a ui-sref="layout.user">
+                <i class="ace-icon fa fa-user blue"></i>
+                Users
+              </a>
+            </li>
+            <li class="hover" ng-class="{'active': currentPage === 'privilege'}">
+              <a ui-sref="layout.privilege">
+                <i class="ace-icon fa fa-check-square-o blue"></i>
+                Privileges
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div class="main-container ace-save-state">
+  <div class="main-content">
+    <div class="main-content-inner">
+      <div class="page-content">
+        <div class="row">
+          <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div ui-view></div>
+            <!-- PAGE CONTENT ENDS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer footer-fixed">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <span class="bigger-120" style="float: left;">
+          <span style="color:#85A74B" class="bolder">Micro</span><span style="color:#9C9E9F"
+            class="bolder">Inspire</span> &copy; 2019-2020
+        </span>
+        <span class="bigger-120 bolder" style="float: right;">
+          Version : 1.0.0.0
+        </span>
+      </div>
+    </div>
+  </div>
+  <a href="javascript:" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+  </a>
+</div>

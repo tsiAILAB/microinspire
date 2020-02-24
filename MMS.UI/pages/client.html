@@ -1,0 +1,192 @@
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6" ng-if="model.ClientType !== 'Primary Insured'">
+    <label class="control-label col-xs-4">Client Type</label>
+    <div class="col-xs-8">
+      <select style="width: 100%;" ng-model="model.ClientType" data-url="/Combo/GetConfigurations/ClientType" mn-select2
+        required ng-disabled="!model.Editing">
+        <option value=""></option>
+        <option ng-repeat="type in ClientTypes" ng-if="type.text !== 'Primary Insured'" value="{{ type.text }}">
+          {{ type.text }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6" ng-if="model.ClientType !== 'Primary Insured'">
+    <label class="control-label col-xs-4">Relationship</label>
+    <div class="col-xs-8">
+      <select style="width: 100%;" ng-model="model.Relationship" data-url="/Combo/GetConfigurations/Relationship"
+        mn-select2 required ng-disabled="!model.Editing">
+        <option value=""></option>
+        <option ng-repeat="rp in Relationships" value="{{ rp.text }}">{{ rp.text }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">First Name</label>
+    <div class="col-xs-8">
+      <input type="text" class="form-control input-xs" ng-model="model.FirstName" placeholder="First Name" required
+        ng-readonly="!model.Editing" />
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Last Name</label>
+    <div class="col-xs-8">
+      <input type="text" class="form-control input-xs" ng-model="model.LastName" placeholder="Last Name"
+        ng-readonly="!model.Editing" />
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Mobile No</label>
+    <div class="col-xs-8">
+      <input type="tel" class="form-control input-xs" ng-model="model.MobileNo" placeholder="Mobile No"
+        ng-readonly="!model.Editing" />
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Bank Account Number</label>
+    <div class="col-xs-8">
+      <input type="text" class="form-control input-xs" ng-model="model.AccountNo" placeholder="Bank Account Number"
+        ng-readonly="!model.Editing" />
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Date of Birth</label>
+    <div class="col-xs-8">
+      <div class="input-group input-group-xs date" mn-date>
+        <input type="text" ng-model="model.DateofBirth" ng-change="birthDateChanged()" class="form-control"
+          ng-readonly="!model.Editing" />
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <i class="glyphicon glyphicon-calendar blue"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Age At Creation Date</label>
+    <div class="col-xs-8">
+      <input type="text" readonly ng-value="model.AgeAtCreationDate" class="form-control input-xs"
+        style="text-align: right;" />
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Gender</label>
+    <div class="col-xs-8">
+      <select style="width: 100%;" ng-model="model.Gender" data-url="/Combo/GetConfigurations/Gender" mn-select2
+        ng-disabled="!model.Editing">
+        <option></option>
+        <option ng-repeat="gen in Genders" value="{{ gen.text }}">{{ gen.text }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Marital Status</label>
+    <div class="col-xs-8">
+      <select style="width: 100%;" ng-model="model.MaritalStatus" data-url="/Combo/GetConfigurations/MaritalStatus"
+        mn-select2 ng-disabled="!model.Editing">
+        <option value=""></option>
+        <option ng-repeat="ms in MStatus" value="{{ ms.text }}">{{ ms.text }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Personal Id Type</label>
+    <div class="col-xs-8">
+      <select style="width: 100%;" ng-model="model.PersonalIdType" data-url="/Combo/GetConfigurations/PersonalIdType"
+        mn-select2 ng-disabled="!model.Editing">
+        <option value=""></option>
+        <option ng-repeat="pit in IdTypes" value="{{ pit.text }}">{{ pit.text }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Personal Id</label>
+    <div class="col-xs-8">
+      <input type="text" class="form-control input-xs" ng-model="model.PersonalId" placeholder="Personal Id"
+        ng-readonly="!model.Editing" />
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Address</label>
+    <div class="col-xs-8">
+      <input type="text" class="form-control input-xs" ng-model="model.Address" placeholder="Address"
+        ng-readonly="!model.Editing" />
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Email Address</label>
+    <div class="col-xs-8">
+      <input type="email" class="form-control input-xs" ng-model="model.Email" placeholder="Email Address"
+        ng-readonly="!model.Editing" />
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Location</label>
+    <div class="col-xs-8">
+      <input type="text" class="form-control input-xs" ng-model="model.Location" placeholder="Location"
+        ng-readonly="!model.Editing" />
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Language</label>
+    <div class="col-xs-8">
+      <select style="width: 100%;" ng-model="model.Language" mn-select2 ng-disabled="!model.Editing">
+        <option value=""></option>
+        <option value="Bengali">Bengali</option>
+        <option value="English">English</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Postal Code</label>
+    <div class="col-xs-8">
+      <input type="text" class="form-control input-xs" ng-model="model.PostalCode" placeholder="Postal Code"
+        ng-readonly="!model.Editing" />
+    </div>
+  </div>
+  <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+    <label class="control-label col-xs-4">Communication</label>
+    <div class="col-xs-8">
+      <select style="width: 100%;" ng-model="model.Communication" mn-select2 ng-disabled="!model.Editing">
+        <option value=""></option>
+        <option value="SMS">SMS</option>
+        <option value="Email">Email</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="align-right" ng-if="model.Editable">
+  <button type="button" class="btn btn-sm btn-primary" ng-if="!model.Editing" ng-click="model.Editing = true">
+    <i class="ace-icon fa fa-edit"></i>
+    <span class="bigger-110">Edit</span>
+  </button>
+  <button type="button" class="btn btn-sm btn-primary" ng-if="model.Editing" ng-click="oncancel(model)">
+    <i class="ace-icon fa fa-close"></i>
+    <span class="bigger-110">Cancel</span>
+  </button>
+  <button type="button" class="btn btn-sm btn-primary" ng-if="model.Editing" ng-click="onupdate(model, eleId)">
+    <i class="ace-icon fa fa-save"></i>
+    <span class="bigger-110">Update</span>
+  </button>
+</div>

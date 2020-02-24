@@ -1,0 +1,299 @@
+<div class="container">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h5 class="panel-title">Policy Information</h5>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Partner</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Policy.PartnerId" data-url="/Combo/GetPartners"
+              ng-change="partnerChanged()" mn-select2 required>
+              <option value=""></option>
+              <option ng-repeat="pet in Partners" value="{{ pet.value }}">{{ pet.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Product</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Policy.ProductId" ng-change="productChanged()" mn-select2
+              required>
+              <option value=""></option>
+              <option ng-repeat="pro in Products" value="{{ pro.value }}">{{ pro.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Benefit</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Policy.BenefitId" ng-change="benefitChanged()" mn-select2
+              required>
+              <option value=""></option>
+              <option ng-repeat="ben in Benefits" value="{{ ben.value }}">{{ ben.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6"
+          ng-class="{'has-error': Model.Policy.ExternalId && Model.IsUsedExternalId === true , 'has-success': Model.Policy.ExternalId && Model.IsUsedExternalId === false}">
+          <label for="externalId" class="col-xs-4">External Id</label>
+          <div class="col-xs-8">
+            <span class="block input-icon input-icon-right">
+              <input type="text" id="externalId" class="form-control input-xs" ng-model="Model.Policy.ExternalId"
+                placeholder="External Id" required />
+              <i class="ace-icon fa fa-times-circle"
+                ng-if="Model.Policy.ExternalId && Model.IsUsedExternalId === true"></i>
+              <i class="ace-icon fa fa-check-circle"
+                ng-if="Model.Policy.ExternalId && Model.IsUsedExternalId === false"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Policy Start</label>
+          <div class="col-xs-8">
+            <div class="input-group input-group-xs date" mn-date>
+              <input type="text" ng-model="Model.Policy.PolicyStart" class="form-control" required />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                  <i class="glyphicon glyphicon-calendar blue"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Sales Reference</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Policy.SalesReference"
+              placeholder="Sales Reference" required />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h5 class="panel-title">Initial Contribution:Loan</h5>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Amount</label>
+          <div class="col-xs-8">
+            <input type="text" ng-model="Model.Policy.LoanAmount" class="form-control input-xs" mn-number scale="2" />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Account No</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Policy.AccountNo"
+              placeholder="Account No" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Cover Start Date</label>
+          <div class="col-xs-8">
+            <div class="input-group input-group-xs date" mn-date>
+              <input type="text" ng-model="Model.Policy.CoverStartDate" ng-change="calculateCoverEndDate()"
+                class="form-control" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                  <i class="glyphicon glyphicon-calendar blue"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Term (Months)</label>
+          <div class="col-xs-8">
+            <input type="text" ng-model="Model.Policy.TermMonths" ng-change="calculateCoverEndDate()"
+              class="form-control input-xs" mn-number />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Cover End Date</label>
+          <div class="col-xs-8">
+            <div class="input-group input-group-xs date" mn-date>
+              <input type="text" ng-model="Model.Policy.CoverEndDate" class="form-control" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                  <i class="glyphicon glyphicon-calendar blue"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Centre Location</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Policy.CentreLocation"
+              placeholder="Centre Location" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Officer Id</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Policy.OfficerId"
+              placeholder="Officer Id" />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Officer Name</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Policy.OfficerName"
+              placeholder="Officer Name" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Category</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Policy.Category" placeholder="Category" />
+          </div>
+        </div>
+        <div style="display:none;" class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Cycle</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Policy.Cycle" placeholder="Cycle" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info" ng-if="Model.CoverageType == 'Asset'">
+    <div class="panel-heading">
+      <h5 class="panel-title">Asset Details</h5>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Asset Type</label>
+          <div class="col-xs-8">
+            <select ng-disabled="Model.DisableAssetType" style="width: 100%;" ng-model="Model.Asset.AssetType"
+              data-url="/Combo/GetConfigurations/AssetType" mn-select2 required>
+              <option value=""></option>
+              <option ng-repeat="type in AssetTypes" value="{{ type.text }}">{{ type.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label ng-show="Model.Asset.AssetType === 'Livestock'" class="control-label col-xs-4">Livestock Value</label>
+          <label ng-show="Model.Asset.AssetType !== 'Livestock'" class="control-label col-xs-4">Asset Value</label>
+          <div class="col-xs-8">
+            <input type="text" ng-model="Model.Asset.AssetValue" class="form-control input-xs" mn-number scale="2"
+              required />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label ng-show="Model.Asset.AssetType === 'Livestock'" class="control-label col-xs-4">Livestock
+            Description</label>
+          <label ng-show="Model.Asset.AssetType !== 'Livestock'" class="control-label col-xs-4">Asset
+            Description</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Asset.AssetDescription"
+              placeholder="Description" />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6" ng-if="Model.Asset.AssetType !== 'Livestock'">
+          <label class="control-label col-xs-4">Business Description</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Asset.BusinessDescription"
+              data-url="/Combo/GetProductConfigurations/{{Model.Policy.ProductId}}/BusinessDescription" mn-select2
+              required>
+              <option value=""></option>
+              <option ng-repeat="type in BusinessDescriptions" value="{{ type.text }}">{{ type.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6" ng-if="Model.Asset.AssetType === 'Livestock'">            
+          <label class="control-label col-xs-4">Livestock Count</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Asset.AssetCount" mn-number />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Address</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Asset.Address" placeholder="Address" />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Location</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Asset.Location" placeholder="Location" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6">
+          <label class="control-label col-xs-4">Postal Code</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control input-xs" ng-model="Model.Asset.PostalCode"
+              placeholder="Postal Code" />
+          </div>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-lg-6" ng-if="Model.Asset.AssetType !== 'Livestock'">
+          <label class="control-label col-xs-4">Structure Type</label>
+          <div class="col-xs-8">
+            <select style="width: 100%;" ng-model="Model.Asset.StructureType"
+              data-url="/Combo/GetConfigurations/StructureType" mn-select2>
+              <option value=""></option>
+              <option ng-repeat="type in StructureTypes" value="{{ type.text }}">{{ type.text }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info" ng-repeat="client in Model.Clients">
+    <div class="panel-heading">
+      <h5 class="panel-title" ng-if="client.ClientType === 'Primary Insured'">
+        {{ client.Title }}
+      </h5>
+      <h5 class="panel-title" ng-if="client.ClientType !== 'Primary Insured'">
+        {{ client.ClientType }} - {{ client.FirstName }}
+        {{ client.LastName }} - {{ client.Relationship }}
+      </h5>
+    </div>
+    <div class="panel-body">
+      <mn-client model="client"></mn-client>
+    </div>
+  </div>
+  <div class="align-right" style="margin-right:15px;">
+    <button type="button" class="btn btn-sm btn-primary" ng-click="addClient()">
+      <i class="ace-icon fa fa-file"></i>
+      <span class="bigger-110">Add Client</span>
+    </button>
+    <button type="button" class="btn btn-sm btn-primary" ng-click="save()">
+      <i class="ace-icon fa fa-save"></i>
+      <span class="bigger-110">Save</span>
+    </button>
+    <button type="button" class="btn btn-sm btn-primary" ng-click="clear()">
+      <i class="ace-icon fa fa-eraser"></i>
+      <span class="bigger-110">Clear</span>
+    </button>
+  </div>
+</div>

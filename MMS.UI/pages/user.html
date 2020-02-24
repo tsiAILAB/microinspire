@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="row form-horizontal">
+    <div class="col-lg-6 col-lg-offset-3">
+      <div class="panel panel-info" style="min-height:120px;">
+        <div class="panel-heading">
+          <h5 class="panel-title">User Information</h5>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="control-label col-xs-4">Email Address</label>
+            <div class="col-xs-8">
+              <input type="email" id="email" class="form-control input-xs" ng-model="Model.Email"
+                placeholder="Email Address" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">First Name</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control input-xs" ng-model="Model.FirstName" placeholder="First Name"
+                required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Last Name</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control input-xs" ng-model="Model.LastName" placeholder="Last Name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Password</label>
+            <div class="col-xs-8">
+              <input type="password" id="password" class="form-control input-xs" placeholder="Enter Password"
+                ng-model="Model.Password" required data-smk-strongPass="strong" autocomplete="new-password" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Confirm Password</label>
+            <div class="col-xs-8">
+              <input type="password" id="confirmPassword" class="form-control input-xs"
+                placeholder="Enter Confirm Password" ng-model="Model.ConfirmPassword" data-smk-strongPass="strong"
+                autocomplete="new-password" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Organization</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.Organization" data-url="/Combo/GetAllPartners" mn-select2>
+                <option value="">All Organization</option>
+                <option ng-repeat="pet in Partners" value="{{ pet.value }}">{{ pet.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">User Type</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.UserType" mn-select2>
+                <option value=""></option>
+                <option value="Admin">Admin</option>
+                <option value="Standard">Agent</option>
+                <option value="Nirvoy">Nirvoy</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4"></label>
+            <div class="col-xs-8">
+              <label style="cursor:pointer;">
+                <input type="checkbox" ng-model="Model.IsActive" mn-check />
+                Active User?
+              </label>
+            </div>
+          </div>
+          <div class="align-right" style="margin-right:10px;">
+            <button type="button" class="btn btn-sm btn-primary" ng-click="create()">
+              <i class="ace-icon fa fa-save"></i>
+              <span class="bigger-110">Save</span>
+            </button>
+            <button type="button" class="btn btn-sm btn-primary" ng-click="clear()">
+              <i class="ace-icon fa fa-eraser"></i>
+              <span class="bigger-110">Clear</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="row form-horizontal">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="panel-heading">
+                <h5 class="panel-title">Add New Claim</h5>
+            </div>
+            <div class="panel panel-info" style="min-height:120px;">
+                <div class="panel-heading">
+                    <h5 class="panel-title">User Details</h5>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Mobile Number</label>
+                        <div class="col-xs-8">
+                            <input type="text" id="mobileNumber" ng-model="Model.Insured.MobileNo"
+                                class="form-control input-xs" required maxlength="14" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Name</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control input-xs" ng-model="Model.Insured.FirstName"
+                                placeholder="Name" required readonly />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Age</label>
+                        <div class="col-xs-8">
+                            <input type="text" ng-model="Model.Insured.AgeAtCreationDate" class="form-control input-xs"
+                                maxlength="2" mn-number readonly />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Identification Type</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control input-xs" ng-model="Model.Insured.PersonalIdType"
+                                placeholder="Identification Type" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Identification Number</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control input-xs" ng-model="Model.Insured.PersonalId"
+                                placeholder="Identification Number" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-info" style="min-height:120px;">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Nominee Details</h5>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Name</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control input-xs" ng-model="Model.Notifier.FirstName"
+                                placeholder="Name" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Mobile Number</label>
+                        <div class="col-xs-8">
+                            <input type="text" ng-model="Model.Notifier.MobileNo" class="form-control input-xs"
+                                maxlength="14" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Age</label>
+                        <div class="col-xs-8">
+                            <input type="text" ng-model="Model.Notifier.AgeAtCreationDate" class="form-control input-xs"
+                                maxlength="2" mn-number />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">Location</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control input-xs" ng-model="Model.Notifier.Location"
+                                placeholder="Location" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="panel panel-info" style="min-height:120px;">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Additional Comments</h5>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <textarea rows="6" maxlength="1000" class="form-control" ng-model="Model.Comments"
+                                placeholder="Comments" mn-showmax></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="align-right" style="margin-right:15px;">
+    <button type="button" class="btn btn-sm btn-primary" ng-click="create()">
+        <i class="ace-icon fa fa-save"></i>
+        <span class="bigger-110">Create Claim</span>
+    </button>
+    <button type="button" class="btn btn-sm btn-primary" ng-click="clear()">
+        <i class="ace-icon fa fa-eraser"></i>
+        <span class="bigger-110">Clear</span>
+    </button>
+</div>
+</div>

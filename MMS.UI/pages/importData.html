@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row form-horizontal">
+    <div class="col-lg-8 col-lg-offset-2">
+      <div class="panel panel-info" style="min-height:120px;">
+        <div class="panel-heading">
+          <h5 class="panel-title">Data Profile Details</h5>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="control-label col-xs-4">Partner</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.PartnerId" data-url="/Combo/GetPartners"
+                ng-change="partnerChanged()" mn-select2 required>
+                <option value=""></option>
+                <option ng-repeat="pet in Partners" value="{{ pet.value }}">{{ pet.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Product</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.ProductId" mn-select2 required>
+                <option value=""></option>
+                <option ng-repeat="pro in Products" value="{{ pro.value }}">{{ pro.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-4">Data Type</label>
+            <div class="col-xs-8">
+              <select style="width: 100%;" ng-model="Model.DataType" mn-select2 required>
+                <option value=""></option>
+                <option value="Policy Enrolments">Policy Enrolments</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-info" style="min-height:200px;">
+        <div class="panel-heading">
+          <h5 class="panel-title">Data File Details</h5>
+        </div>
+        <div class="panel-body">
+          <p style="font-weight: bold;">
+            Please click the Browse button to locate the file you want to
+            load. Once a file is chosen click file import for the data to be imported. Only xls and xlsx file types
+            are allowed.
+          </p>
+          <div class="row">
+            <div class="form-group col-xs-12 col-sm-8 col-lg-8">
+              <label style="font-weight: bold;" class="control-label col-xs-12">File Name:
+                {{ Model.FileName }}</label>
+              <div class="col-xs-12">
+                <button type="button" id="fileUpload" class="btn btn-default btn-Main" style="width: 100%;">
+                  <i class="glyphicon glyphicon-cloud-upload"></i>
+                  Browse File...
+                </button>
+              </div>
+            </div>
+            <div class="form-group col-xs-12 col-sm-2 col-lg-2">
+              <button style="margin-top:20px;" type="button" class="btn btn-sm btn-primary"
+                ng-disabled="!Model.FileName" ng-click="fileImport()">
+                <span class="bigger-110">File Import</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

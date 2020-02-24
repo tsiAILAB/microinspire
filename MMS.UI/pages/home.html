@@ -1,0 +1,162 @@
+<style>
+  /* some elements used in demo only */
+  .spinner-preview {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    margin-top: 60px;
+  }
+
+  .dropdown-preview {
+    width: 203px;
+    margin: 0 5px;
+    display: inline-block;
+  }
+
+  .dropdown-preview>.dropdown-menu {
+    width: 203px;
+    display: block;
+    position: static;
+    margin-bottom: 5px;
+    /* background-color: #85A74B; */
+  }
+
+  .dropdown-preview>.dropdown-menu>li>a {
+    font-weight: bold;
+    color: white;
+  }
+</style>
+<div class="container">
+  <div ng-if="currentUserType !== 'Nirvoy'" class="col-lg-8 col-lg-offset-2">
+    <div class="space-12"></div>
+    <div class="infobox-container">
+      <div class="dropdown dropdown-preview">
+        <ul class="dropdown-menu">
+          <li>
+            <a style="width:100%;margin:0px;" tabindex="-1" href="javascript:"
+              class="btn btn-app btn-success no-radius">
+              Policy
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <!-- <a ui-sref="layout.policy" tabindex="-1">New Policy</a> -->
+            <a style="width:100%;margin:0px;" tabindex="-1" ui-sref="layout.policy" tabindex="-1"
+              class="btn btn-app btn-info">
+              New Policy
+            </a>
+          </li>
+          <li>
+            <!-- <a ui-sref="layout.policysearch" tabindex="-1">Search Policy</a> -->
+            <a style="width:100%;margin:0px;" tabindex="-1" ui-sref="layout.policysearch" tabindex="-1"
+              class="btn btn-app btn-info">
+              Search Policy
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown dropdown-preview">
+        <ul class="dropdown-menu">
+          <li>
+            <a style="width:100%;margin:0px;" tabindex="-1" href="javascript:"
+              class="btn btn-app btn-success no-radius">
+              Claim
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <!-- <a ui-sref="layout.claim" tabindex="-1">New Claim</a> -->
+            <a style="width:100%;margin:0px;" tabindex="-1" ui-sref="layout.claim" tabindex="-1"
+              class="btn btn-app btn-info">
+              New Claim
+            </a>
+          </li>
+          <li>
+            <!-- <a ui-sref="layout.claimsearch" tabindex="-1">Search Claim</a> -->
+            <a style="width:100%;margin:0px;" tabindex="-1" ui-sref="layout.claimsearch" tabindex="-1"
+              class="btn btn-app btn-info">
+              Search Claim
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown dropdown-preview">
+        <ul class="dropdown-menu">
+          <li>
+            <a style="width:100%;margin:0px;" tabindex="-1" href="javascript:"
+              class="btn btn-app btn-success no-radius">
+              Reports
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <!-- <a ui-sref="layout.report({ reportName: 'Policy' })" tabindex="-1">Policy Report</a> -->
+            <a style="width:100%;margin:0px;" tabindex="-1" ui-sref="layout.report({ reportName: 'Policy' })"
+              tabindex="-1" class="btn btn-app btn-info">
+              Policy Report
+            </a>
+          </li>
+          <li>
+            <a style="width:100%;margin:0px;" tabindex="-1" ui-sref="layout.report({ reportName: 'ClaimDetails' })"
+              tabindex="-1" class="btn btn-app btn-info">
+              Claim Report
+            </a>
+            <!-- <a ui-sref="layout.report({ reportName: 'ClaimDetails' })" tabindex="-1">Claim Report</a> -->
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="space-12"></div>
+    <div class="space-12"></div>
+    <div class="space-12"></div>
+    <div class="infobox-container">
+      <div class="infobox infobox-green">
+        <div style="text-align: center;width: 100%;padding-left:0px;" class="infobox-data">
+          <span class="infobox-data-number">Status</span>
+        </div>
+      </div>
+    </div>
+    <div class="infobox-container">
+      <div class="infobox infobox-green">
+        <div class="infobox-icon">
+          <i class="ace-icon fa fa-ruble"></i>
+        </div>
+        <div class="infobox-data">
+          <span class="infobox-data-number">Policy</span>
+        </div>
+      </div>
+      <div class="infobox infobox-blue">
+        <a style="width:60%;margin:0px;" href="javascript:" class="btn btn-app btn-info">
+          New Policy
+          <span class="badge badge-warning">{{Model.NewPolicy}}</span>
+        </a>
+      </div>
+      <div class="infobox infobox-pink">
+        <a style="width:60%;margin:0px;" href="javascript:" class="btn btn-app btn-pink">
+          Total Policy
+          <span class="badge badge-warning">{{Model.TotalPolicy}}</span>
+        </a>
+      </div>
+      <div class="infobox infobox-red">
+        <div class="infobox-icon">
+          <i class="ace-icon fa fa-users"></i>
+        </div>
+        <div class="infobox-data">
+          <span class="infobox-data-number">Claim</span>
+        </div>
+      </div>
+      <div class="infobox infobox-orange2">
+        <a style="width:60%;margin:0px;" href="javascript:" class="btn btn-app btn-success">
+          New Claim
+          <span class="badge badge-warning">{{Model.NewClaim}}</span>
+        </a>
+      </div>
+      <div class="infobox infobox-blue2">
+        <a style="width:60%;margin:0px;" href="javascript:" class="btn btn-app btn-purple">
+          Total Claim
+          <span class="badge badge-warning">{{Model.TotalClaim}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
