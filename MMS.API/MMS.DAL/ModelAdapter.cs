@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MMS.Core;
+using Core;
 using System;
 using System.Collections.Generic;
 using System.Data;

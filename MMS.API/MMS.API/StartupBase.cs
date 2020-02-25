@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using MMS.Core;
+using Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;

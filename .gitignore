@@ -357,11 +357,7 @@ MigrationBackup/
 MMS.API/MMS.API/.vs/
 MMS.API/MMS.API/bin/
 MMS.API/MMS.API/obj/
-MMS.API/MMS.Core/bin/
-MMS.API/MMS.Core/obj/
 MMS.API/MMS.DAL/bin/
 MMS.API/MMS.DAL/obj/
 MMS.API/MMS.Manager/bin/
 MMS.API/MMS.Manager/obj/
-MMS.API/MMS.ClassGenerator/bin/
-MMS.API/MMS.ClassGenerator/obj/

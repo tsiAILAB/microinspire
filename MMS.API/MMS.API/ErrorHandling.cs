@@ -1,4 +1,4 @@
-﻿using MMS.Core;
+﻿using Core;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;

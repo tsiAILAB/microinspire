@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using MMS.Core;
+using Core;
 using MMS.Manager;
 using System;
 using System.IO;

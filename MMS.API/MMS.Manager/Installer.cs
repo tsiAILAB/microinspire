@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MMS.Core;
+using Core;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;

@@ -1,4 +1,4 @@
-using MMS.Core;
+using Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
