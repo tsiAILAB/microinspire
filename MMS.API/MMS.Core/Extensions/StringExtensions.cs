@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace MMS.Core
+namespace Core
 {
     public static class StringExtensions
     {

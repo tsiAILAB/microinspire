@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace MMS.Core
+namespace Core
 {
     public class CustomJsonConverter<T> : JsonConverter
     {

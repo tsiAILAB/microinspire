@@ -1,4 +1,4 @@
-using MMS.Core;
+using Core;
 using MMS.DAL;
 using Newtonsoft.Json;
 using System;

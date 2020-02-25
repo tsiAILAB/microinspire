@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 
-namespace MMS.Core
+namespace Core
 {
     public static class AppContexts
     {

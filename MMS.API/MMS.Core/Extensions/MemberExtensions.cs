@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace MMS.Core
+namespace Core
 {
     /// <summary>
     /// Extensions to <see cref="T:System.Reflection.MemberInfo" />.

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
-using MMS.Core;
+using Core;
 using System;
 using System.Collections.Generic;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace MMS.Core
+namespace Core
 {
     public static class ExtensionMethods
     {

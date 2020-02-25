@@ -1,4 +1,4 @@
-﻿using MMS.Core;
+﻿using Core;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace MMS.Core
+namespace Core
 {
     /// <summary>Extension methods for Collections.</summary>
     public static class CollectionExtensions

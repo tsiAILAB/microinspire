@@ -1,4 +1,4 @@
-﻿namespace MMS.Core
+﻿namespace Core
 {
     public class Connection
     {

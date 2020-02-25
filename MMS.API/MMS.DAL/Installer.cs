@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MMS.Core;
+using Core;
 
 namespace MMS.DAL
 {

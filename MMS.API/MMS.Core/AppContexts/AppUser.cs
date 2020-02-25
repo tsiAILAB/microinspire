@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MMS.Core
+namespace Core
 {
     public class AppUser
     {  

@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 
-namespace MMS.Core
+namespace Core
 {
     public class LongToStringConverter : JsonConverter
     {

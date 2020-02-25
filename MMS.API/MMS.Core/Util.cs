@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace MMS.Core
+namespace Core
 {
     public static class Util
     {

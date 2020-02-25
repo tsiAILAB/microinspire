@@ -1,4 +1,4 @@
-﻿using MMS.Core;
+﻿using Core;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
 

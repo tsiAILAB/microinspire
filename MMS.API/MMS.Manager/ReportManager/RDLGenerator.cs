@@ -2,7 +2,7 @@
 using System.Data;
 using System.IO;
 using System.Xml;
-using MMS.Core;
+using Core;
 
 namespace MMS.Manager
 {

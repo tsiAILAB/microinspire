@@ -1,5 +1,5 @@
 using AspNetCore.Reporting;
-using MMS.Core;
+using Core;
 using MMS.DAL;
 using System.Collections.Generic;
 using System.Data;

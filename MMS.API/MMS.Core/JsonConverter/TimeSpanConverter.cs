@@ -2,7 +2,7 @@
 using System;
 using System.Globalization;
 
-namespace MMS.Core
+namespace Core
 {
     public class TimeSpanConverter : JsonConverter
     {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Converters;
 
-namespace MMS.Core
+namespace Core
 {
     public class SystemDateTimeConverter : IsoDateTimeConverter
     {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MMS.Core;
+using Core;
 using System;
 using System.ComponentModel;
 

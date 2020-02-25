@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using MMS.Core;
+using Core;
 using MMS.Manager;
 using System;
 using System.Threading.Tasks;

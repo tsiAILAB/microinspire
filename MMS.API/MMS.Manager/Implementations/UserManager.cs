@@ -1,4 +1,4 @@
-using MMS.Core;
+using Core;
 using MMS.DAL;
 using System;
 using System.Collections.Generic;
