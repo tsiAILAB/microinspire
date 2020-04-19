@@ -10,18 +10,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MMS.Core\MMS.Core.csproj" />
     <ProjectReference Include="..\MMS.Manager\MMS.Manager.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\Reports\" />
     <Folder Include="wwwroot\temp\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Core">
-      <HintPath>..\Core\Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
