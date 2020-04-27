@@ -14,6 +14,6 @@ var MicroInspireApp = angular
     MinDateValue: "01/01/0001",
     SystemDateFormat: "dd/mm/yyyy",
     ServerDateFormat: "dd/mm/yyyy",
-    BaseUrl: "http://localhost:5501",
-    ApiUrl: "http://localhost:10050"
+    BaseUrl: "http://microinspire.com",
+    ApiUrl: "http://api.microinspire.com"
   });

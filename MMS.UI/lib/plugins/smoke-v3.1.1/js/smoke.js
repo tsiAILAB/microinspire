@@ -141,7 +141,7 @@
       }
 
       // Se validan los INPUTS que son requeridos y estan vacios
-      if (required === "required" && (value === "" || value === undefined || value === null || value === "? string: ?" || value === "? undefined:undefined ?")) {
+      if (required === "required" && (value === "" || value === undefined)) {
         // Se agrega el mensaje de error
         result = $.smkAddError(input, languaje.textEmpty);
       }
