@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Core">
-      <HintPath>..\Core\Core.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\MMS.Core\MMS.Core.csproj" />
   </ItemGroup>
 
 </Project>
