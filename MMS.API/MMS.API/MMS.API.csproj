@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\ClaimDocuments\" />
     <Folder Include="wwwroot\Reports\" />
     <Folder Include="wwwroot\temp\" />
   </ItemGroup>
