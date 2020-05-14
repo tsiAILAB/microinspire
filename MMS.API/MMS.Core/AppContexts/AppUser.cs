@@ -3,7 +3,7 @@
 namespace Core
 {
     public class AppUser
-    {  
+    {
         public int LogedId { get; set; }
         public int UserId { get; set; }
         public string Email { get; set; }
